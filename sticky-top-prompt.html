@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>捲動固定展示頁面</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        /* 確保區塊高度符合 100vh */
+        .h-100vh { /*vh-100 of bootstrap*/ 
+            height: 100vh;
+        }
+        /* 固定時的樣式，為了保持原位不塌陷 */
+        .fixed-top-placeholder {
+            height: 100px; /* 與紅色區塊高度一致 */
+            display: none; /* 預設隱藏 */
+        }
+        .is-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030; /* 確保在頂層，略高於 Bootstrap 預設導航列 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-primary text-white d-flex align-items-center justify-content-center h-100vh">
+        <h1>藍色區塊 (100vh)</h1>
+    </div>
+
+    <div class="fixed-top-placeholder" id="red-placeholder"></div>
+
+    <div class="bg-danger text-white d-flex align-items-center justify-content-center" style="height: 100px;" id="red-section">
+        <h3>紅色區塊 (100px) - 捲動至頂端時固定</h3>
+    </div>
+
+    <div class="bg-light d-flex align-items-center justify-content-center h-100vh">
+        <h1>淺色區塊 (100vh)</h1>
+    </div>
+
+    <div class="bg-dark text-white d-flex align-items-center justify-content-center h-100vh">
+        <h1>深色區塊 (100vh)</h1>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            var $redSection = $('#red-section');
+            var $redPlaceholder = $('#red-placeholder');
+            var originalTop = $redSection.offset().top; // 取得紅色區塊最初距離文件頂端的位置
+
+            // 處理捲動事件
+            $(window).on('scroll', function() {
+                var currentScroll = $(window).scrollTop(); // 目前捲動的距離
+
+                // 判斷是否捲動超過紅色區塊的原始頂部位置
+                if (currentScroll >= originalTop) {
+                    // 捲動超過，進行固定
+                    if (!$redSection.hasClass('is-fixed')) {
+                        $redSection.addClass('is-fixed');
+                        $redPlaceholder.show(); // 顯示佔位元素，避免頁面跳動
+                    }
+                } else {
+                    // 往回捲動，回復原位
+                    if ($redSection.hasClass('is-fixed')) {
+                        $redSection.removeClass('is-fixed');
+                        $redPlaceholder.hide(); // 隱藏佔位元素
+                    }
+                }
+            });
+
+            // 首次載入或調整視窗大小後，重新計算 originalTop (考慮到不同螢幕尺寸)
+            $(window).on('resize', function() {
+                // 如果已經是固定的，先移除固定樣式以正確計算新的位置
+                if ($redSection.hasClass('is-fixed')) {
+                    $redSection.removeClass('is-fixed');
+                    $redPlaceholder.hide();
+                    originalTop = $redSection.offset().top;
+                    $redSection.addClass('is-fixed');
+                    $redPlaceholder.show();
+                } else {
+                    originalTop = $redSection.offset().top;
+                }
+            }).trigger('resize'); // 立即觸發一次以初始化 originalTop
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horizontal Scroll - Antigravity</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* 頂部 100vh banner（無內容） */
+    .banner {
+      height: 100vh;
+      background: #1e2022;
+    }
+
+    /* 橫向捲軸容器：高度由 JS 動態設定為 (100vh + 可橫向捲動的距離) */
+    .hscroll-section {
+      position: relative;
+    }
+
+    /* Sticky 視窗：當 container 頂部碰觸到 viewport 頂部時黏住固定 */
+    .sticky-wrapper {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    /* 橫向滾動軌道 */
+    .scroll-track {
+      height: 100%;
+      width: max-content;
+      will-change: transform;
+      display: flex;
+    }
+
+    .scroll-track img {
+      height: 100vh;
+      width: auto;
+      max-width: none;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* 底部 100vh footer */
+    .footer {
+      height: 100vh;
+      background: #18191a;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. 100vh Banner (沒有內容) -->
+  <section class="banner"></section>
+
+  <!-- 2. 橫向滾動大圖區塊 -->
+  <section class="hscroll-section" id="hscrollSection">
+    <div class="sticky-wrapper">
+      <div class="scroll-track" id="scrollTrack">
+        <img 
+          id="scrollImage" 
+          src="https://static01.nyt.com/newsgraphics/2016/07/14/france-attack-scroller/9ec6dcec7e22fffa81a21fb790ba566f2c6aee83/base-big.jpg" 
+          alt="France Attack Scroller Base"
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 100vh Footer -->
+  <footer class="footer"></footer>
+
+  <script>
+    const section = document.getElementById('hscrollSection');
+    const track = document.getElementById('scrollTrack');
+    const image = document.getElementById('scrollImage');
+
+    let maxScrollDistance = 0;
+    let ticking = false;
+
+    // 計算橫向滾動所需的垂直滾動距離與容器高度
+    function calculateMetrics() {
+      // 圖片寬度扣掉 viewport 寬度 = 需要橫向位移的總距離
+      const trackWidth = track.scrollWidth || image.offsetWidth;
+      maxScrollDistance = Math.max(0, trackWidth - window.innerWidth);
+      
+      // 當捲動 maxScrollDistance 時剛好右邊緣貼齊視窗右緣，之後釋放 sticky 繼續垂直滾動
+      section.style.height = `${window.innerHeight + maxScrollDistance}px`;
+      updateScroll();
+    }
+
+    function updateScroll() {
+      // section 的 top 相對於 viewport 頂部的距離
+      const rect = section.getBoundingClientRect();
+      const scrolled = -rect.top;
+
+      // 只有當 section top 碰觸到 viewport top (scrolled >= 0) 時才開始位移
+      // 達到 maxScrollDistance（圖片右緣碰到 viewport 右緣）時停止
+      const translateX = Math.min(Math.max(scrolled, 0), maxScrollDistance);
+
+      track.style.transform = `translate3d(${-translateX}px, 0, 0)`;
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(updateScroll);
+        ticking = true;
+      }
+    }
+
+    // 監聽滾動與視窗尺寸變更
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', calculateMetrics);
+
+    // 確保圖片載入完成後計算尺寸
+    if (image.complete) {
+      calculateMetrics();
+    } else {
+      image.addEventListener('load', calculateMetrics);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數位新聞｜GSAP 控制滑頁</title>
+    <style>
+        :root { --screen: 100vh; color-scheme: dark; }
+        @supports (height: 100dvh) {
+            :root { --screen: 100dvh; }
+        }
+        * { box-sizing: border-box; }
+        [hidden] { display: none !important; }
+        body { margin: 0; background: #285540; color: #fff; font-family: system-ui, sans-serif; }
+
+        /* 不使用 CSS Snap 或 CSS 平滑捲動，避免與 GSAP 動畫互相干擾。
+           保留真實捲動位置，第三頁內部仍由瀏覽器正常捲動。 */
+        .story {
+            height: var(--screen);
+            overflow-y: auto;
+            position: relative;
+            overscroll-behavior-y: contain;
+        }
+        .scene {
+            min-height: var(--screen);
+            background: var(--color);
+        }
+        .scene--long { min-height: calc(var(--screen) * 2); }
+        .panel {
+            min-height: var(--screen);
+            display: grid;
+            place-content: center;
+            padding: 4rem 2rem 7rem;
+            text-align: center;
+        }
+        .panel--dark { background: #285540; }
+        h1, h2 { margin: 0 0 1rem; font-size: clamp(2rem, 6vw, 4rem); }
+        p { max-width: 36rem; margin: .5rem auto; line-height: 1.8; font-size: 1.1rem; }
+        .eyebrow { font-size: .8rem; letter-spacing: .15em; opacity: .8; }
+
+        .navigation {
+            position: fixed;
+            bottom: max(1rem, env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: .25rem;
+            padding: .5rem;
+            border: 1px solid #ffffff40;
+            border-radius: 3rem;
+            background: #161c21e6;
+        }
+        button {
+            border: 0;
+            border-radius: 50%;
+            width: 2.25rem;
+            height: 2.25rem;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+        }
+        button[aria-current="step"] { background: white; color: #161c21; }
+        button:hover { background: #ffffff30; }
+        button[aria-current="step"]:hover { background: #ddd; }
+        button:focus-visible { outline: 3px solid #ffd67a; outline-offset: 2px; }
+        .story:focus-visible { outline: 3px solid #ffd67a; outline-offset: -3px; }
+        .page-count { padding: 0 .5rem; font-size: .8rem; white-space: nowrap; }
+    </style>
+</head>
+<body>
+    <main class="story" tabindex="0" aria-label="五頁數位新聞，可捲動或使用 Page Up、Page Down 換屏">
+        <section class="scene" id="page-1" aria-labelledby="title-1" style="--color: #b34848;">
+            <div class="panel">
+                <p class="eyebrow">DIGITAL STORY / 01</p>
+                <h1 id="title-1">第一頁</h1>
+                <p>捲動滑鼠或滑動觸控螢幕，進入下一頁。</p>
+            </div>
+        </section>
+        <section class="scene" id="page-2" aria-labelledby="title-2" style="--color: #326b9b;">
+            <div class="panel">
+                <p class="eyebrow">DIGITAL STORY / 02</p>
+                <h2 id="title-2">第二頁</h2>
+                <p>輕捲一下，由 GSAP 完成整頁滑入，不必捲滿整個畫面。</p>
+            </div>
+        </section>
+        <!-- 第三頁保留兩個視窗高，內文正常捲動，到邊界後才進入下一次換頁。 -->
+        <section class="scene scene--long" id="page-3" aria-labelledby="title-3" style="--color: #39735a;">
+            <div class="panel">
+                <p class="eyebrow">DIGITAL STORY / 03 — 上半部</p>
+                <h2 id="title-3">第三頁</h2>
+                <p>這一頁有兩個視窗高，保留一般捲動，逐步閱讀內容。</p>
+            </div>
+            <div class="panel panel--dark">
+                <p class="eyebrow">DIGITAL STORY / 03 — 下半部</p>
+                <h2>故事繼續</h2>
+                <p>讀完下半部後，繼續往下捲，便會滑入第四頁。</p>
+            </div>
+        </section>
+        <section class="scene" id="page-4" aria-labelledby="title-4" style="--color: #75529b;">
+            <div class="panel">
+                <p class="eyebrow">DIGITAL STORY / 04</p>
+                <h2 id="title-4">第四頁</h2>
+                <p>回到一個視窗高的版面，繼續整頁滑入。</p>
+            </div>
+        </section>
+        <section class="scene" id="page-5" aria-labelledby="title-5" style="--color: #946021;">
+            <div class="panel">
+                <p class="eyebrow">DIGITAL STORY / 05</p>
+                <h2 id="title-5">第五頁</h2>
+                <p>故事結束。往上捲動，可以回到前面的內容。</p>
+            </div>
+        </section>
+    </main>
+
+    <nav class="navigation" aria-label="新聞頁面導覽" hidden>
+        <button type="button" data-page="0" aria-label="前往第一頁" aria-controls="page-1">1</button>
+        <button type="button" data-page="1" aria-label="前往第二頁" aria-controls="page-2">2</button>
+        <button type="button" data-page="2" aria-label="前往第三頁" aria-controls="page-3">3</button>
+        <button type="button" data-page="3" aria-label="前往第四頁" aria-controls="page-4">4</button>
+        <button type="button" data-page="4" aria-label="前往第五頁" aria-controls="page-5">5</button>
+        <output class="page-count" aria-live="polite" aria-atomic="true">1 / 5</output>
+    </nav>
+
+    <!-- 固定版本；CDN 無法載入時，仍可使用一般捲動閱讀。 -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+    <script>
+        /**
+         * 參考：
+         * https://gsap.com/docs/v3/Plugins/ScrollToPlugin/
+         * https://alvarotrigo.com/fullPage/help/make-a-section-scrollable-in-fullpage-js-using-scrolloverflow/
+         *
+         * 自訂混合控制器（不是套件的現成官方範例）：
+         * 1. 短頁：攔截捲動，GSAP 將 scrollTop 動畫移到下一頁。
+         * 2. 長頁：內文交給原生捲動；到頂／底才允許離開。
+         * 3. 換頁後：動畫完成，且輸入停止 180ms，才接受下一次手勢。
+         *    這比固定鎖定 800ms 更能處理觸控板較長的慣性尾巴。
+         */
+        class SlideStory {
+            constructor(root, navigation) {
+                this.root = root;
+                this.navigation = navigation;
+                this.scenes = [...root.querySelectorAll('.scene')];
+                this.buttons = [...navigation.querySelectorAll('[data-page]')];
+                this.counter = navigation.querySelector('output');
+                this.motion = matchMedia('(prefers-reduced-motion: reduce)');
+                this.events = new AbortController();
+                this.locked = false;
+                this.animating = false;
+                this.touching = false;
+                this.distance = 0;
+                this.lastInput = -Infinity;
+                this.timer = 0;
+                this.frame = 0;
+                this.tween = null;
+                this.activeIndex = -1;
+                const { signal } = this.events;
+
+                root.addEventListener('wheel', event => {
+                    // 保留觸控板縮放，以及主要為水平方向的手勢。
+                    if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+                    this.touchBounds = null;
+                    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? root.clientHeight : 1;
+                    this.input(event.deltaY * unit, event);
+                }, { passive: false, signal });
+
+                root.addEventListener('touchstart', event => {
+                    if (event.touches.length !== 1) return;
+                    this.touching = true;
+                    this.touchY = event.touches[0].clientY;
+                    const scene = this.scenes[this.currentIndex()];
+                    this.touchBounds = scene.offsetHeight > root.clientHeight + 2
+                        ? [scene.offsetTop, scene.offsetTop + scene.offsetHeight - root.clientHeight] : null;
+                }, { passive: true, signal });
+                root.addEventListener('touchmove', event => {
+                    if (!this.touching || event.touches.length !== 1) return;
+                    const y = event.touches[0].clientY;
+                    const delta = this.touchY - y;
+                    this.touchY = y;
+                    this.input(delta, event);
+                }, { passive: false, signal });
+                const endTouch = () => {
+                    this.touching = false;
+                    this.lastInput = performance.now();
+                    this.queueUnlock();
+                };
+                root.addEventListener('touchend', endTouch, { signal });
+                root.addEventListener('touchcancel', endTouch, { signal });
+                root.addEventListener('scroll', () => {
+                    // 長頁觸控慣性仍受頁面邊界限制，避免手指離開後滑進下一頁。
+                    if (this.touchBounds && !this.animating) {
+                        const [start, end] = this.touchBounds;
+                        root.scrollTop = Math.max(start, Math.min(end, root.scrollTop));
+                    }
+                    this.scheduleUpdate();
+                }, { passive: true, signal });
+                root.addEventListener('keydown', event => this.onKeydown(event), { signal });
+                navigation.addEventListener('click', event => {
+                    const button = event.target.closest('[data-page]');
+                    if (button) this.animateTo(this.scenes[Number(button.dataset.page)].offsetTop);
+                }, { signal });
+
+                this.resizeObserver = new ResizeObserver(() => {
+                    // 視窗尺寸改變時，終止舊尺寸的動畫，對齊目前頁面。
+                    if (this.animating) {
+                        this.tween?.kill();
+                        this.animating = false;
+                        this.locked = false;
+                        this.root.scrollTop = this.scenes[this.activeIndex].offsetTop;
+                    }
+                    this.scheduleUpdate();
+                });
+                this.resizeObserver.observe(root);
+                navigation.hidden = false;
+                this.update();
+            }
+
+            currentIndex() {
+                // 取視窗上緣所在的 section；長頁不需要拆成兩個頁碼。
+                let index = 0;
+                this.scenes.forEach((scene, i) => {
+                    if (scene.offsetTop <= this.root.scrollTop + 2) index = i;
+                });
+                return index;
+            }
+
+            input(delta, event) {
+                if (!delta) return;
+                const now = performance.now();
+                if (now - this.lastInput > 180) this.distance = 0;
+                this.lastInput = now;
+                this.queueUnlock();
+                if (this.locked) { event.preventDefault(); return; }
+
+                const index = this.currentIndex();
+                const scene = this.scenes[index];
+                const start = scene.offsetTop;
+                const end = start + scene.offsetHeight - this.root.clientHeight;
+                const top = this.root.scrollTop;
+                const direction = Math.sign(delta);
+
+                // 長頁中間：不阻止預設行為，維持原生捲動。
+                if ((direction > 0 && top < end - 2) || (direction < 0 && top > start + 2)) {
+                    this.distance = 0;
+                    // 大幅捲動接近邊界時，先停在長頁頂／底，不直接越過。
+                    if (top + delta >= end - 2 || top + delta <= start + 2) {
+                        event.preventDefault();
+                        this.root.scrollTop = direction > 0 ? end : start;
+                        this.locked = true;
+                    }
+                    return;
+                }
+
+                event.preventDefault();
+                // 累積小幅輸入，濾掉觸控板輕微抖動；反向時重新累積。
+                if (Math.sign(this.distance) !== direction) this.distance = 0;
+                this.distance += delta;
+                if (Math.abs(this.distance) < 18) return;
+
+                const next = this.scenes[index + direction];
+                if (!next) return;
+                // 往回時先看到上一頁的底部，尤其是第三頁下半部。
+                const target = next.offsetTop + (direction < 0 ? next.offsetHeight - this.root.clientHeight : 0);
+                this.animateTo(target);
+            }
+
+            animateTo(top) {
+                this.tween?.kill();
+                this.touchBounds = null;
+                this.locked = true;
+                this.animating = true;
+                this.distance = 0;
+                this.tween = gsap.to(this.root, {
+                    scrollTo: { y: top, autoKill: false },
+                    duration: this.motion.matches ? 0 : 0.7,
+                    ease: 'power2.inOut',
+                    overwrite: true,
+                    onComplete: () => {
+                        this.animating = false;
+                        this.queueUnlock();
+                        this.update();
+                    }
+                });
+            }
+
+            queueUnlock() {
+                clearTimeout(this.timer);
+                this.timer = setTimeout(() => {
+                    if (!this.animating && !this.touching && performance.now() - this.lastInput >= 180) {
+                        this.locked = false;
+                        this.distance = 0;
+                    } else this.queueUnlock();
+                }, 190);
+            }
+
+            onKeydown(event) {
+                if (event.target !== this.root || event.ctrlKey || event.metaKey || event.altKey) return;
+                const direction = ['ArrowDown', 'PageDown', ' '].includes(event.key) ? 1
+                    : ['ArrowUp', 'PageUp'].includes(event.key) ? -1 : 0;
+                if (direction) {
+                    event.preventDefault();
+                    if (event.repeat || this.animating) return;
+                    // 每次移動一個視窗：第三頁會先閱讀下半部，再換到第四頁。
+                    this.animateTo(this.root.scrollTop + direction * this.root.clientHeight);
+                } else if (event.key === 'Home' || event.key === 'End') {
+                    event.preventDefault();
+                    this.animateTo(event.key === 'Home' ? 0 : this.root.scrollHeight - this.root.clientHeight);
+                }
+            }
+
+            scheduleUpdate() {
+                if (this.frame) return;
+                this.frame = requestAnimationFrame(() => { this.frame = 0; this.update(); });
+            }
+
+            update() {
+                const center = this.root.scrollTop + this.root.clientHeight / 2;
+                let index = 0;
+                this.scenes.forEach((scene, i) => { if (scene.offsetTop <= center) index = i; });
+                if (index === this.activeIndex) return;
+                this.activeIndex = index;
+                this.buttons.forEach((button, i) => {
+                    if (i === index) button.setAttribute('aria-current', 'step');
+                    else button.removeAttribute('aria-current');
+                });
+                this.counter.textContent = `${index + 1} / ${this.scenes.length}`;
+            }
+
+            destroy() {
+                this.events.abort();
+                this.resizeObserver.disconnect();
+                this.tween?.kill();
+                clearTimeout(this.timer);
+                cancelAnimationFrame(this.frame);
+                this.navigation.hidden = true;
+            }
+        }
+
+        // 套件載入失敗時保留自然捲動，不將畫面鎖死。
+        if (window.gsap && window.ScrollToPlugin) {
+            gsap.registerPlugin(ScrollToPlugin);
+            new SlideStory(document.querySelector('.story'), document.querySelector('.navigation'));
+        }
+    </script>
+</body>
+</html>

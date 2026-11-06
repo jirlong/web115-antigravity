@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="div1" style="width: 100%; height: 100vh; background-color: royalblue;"></div>
+    <div id="div2" style="width: 100%; height: 100vh; background-color: pink;"></div>
+    <div id="div3" style="width: 100%; height: 100vh; background-color: darkgray;"></div>
+    <div id="div4" style="width: 100%; height: 100vh; background-color: black;"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!--jQuery CDN Link should be here-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        // $(document).ready(function () {
+        //     console.log("ready!");
+        // });
+
+        // $(); # shorthand
+        // $(document).ready();
+        // $(document).ready(function(){});
+
+        $(document).ready(function(){
+            var winw = $(window).width();
+            var winh = $(window).height();
+            console.log("ready!");
+            console.log(winw);
+            console.log(winh);
+
+            var div3_pos = $("#div3").offset().top;
+            console.log("div3_pos: " + div3_pos);
+
+
+            // $(window).scroll(function(){});
+            $(window).scroll(function(){
+                var scroll_pos = $(window).scrollTop();
+                console.log("scroll_pos: " + scroll_pos);
+            });
+
+
+        });
+
+    </script>
+
+
+
+  </body>
+</html>

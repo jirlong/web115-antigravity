@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horizontal Scrolling</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #f5f4ef; }
+
+  .banner, .footer { height: 100vh; }
+  .banner { background: #242b29; }
+  .footer { background: #bb462b; }
+
+  /* 高度由 JS 設為 100vh + 橫向可捲動距離，垂直捲動量 = 橫向位移量 */
+  .hscroll { position: relative; height: 300vh; }
+  .sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .track { height: 100%; width: max-content; will-change: transform; }
+  .track img { display: block; height: 100vh; width: auto; max-width: none; }
+</style>
+</head>
+<body>
+
+<section class="banner"></section>
+
+<section class="hscroll" id="hscroll">
+  <div class="sticky">
+    <div class="track" id="track">
+      <img id="img" alt=""
+        src="https://static01.nyt.com/newsgraphics/2016/07/14/france-attack-scroller/9ec6dcec7e22fffa81a21fb790ba566f2c6aee83/base-big.jpg">
+    </div>
+  </div>
+</section>
+
+<section class="footer"></section>
+
+<script>
+  const section = document.getElementById('hscroll');
+  const track = document.getElementById('track');
+  const img = document.getElementById('img');
+  let distance = 0;
+
+  function measure() {
+    distance = Math.max(0, track.scrollWidth - window.innerWidth);
+    section.style.height = (window.innerHeight + distance) + 'px';
+    update();
+  }
+
+  function update() {
+    // section top 碰到 viewport top 時開始位移；圖片右緣碰到 viewport 右緣後停止
+    const scrolled = -section.getBoundingClientRect().top;
+    const x = Math.min(Math.max(scrolled, 0), distance);
+    track.style.transform = `translate3d(${-x}px, 0, 0)`;
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', measure);
+  img.addEventListener('load', measure);
+  measure();
+</script>
+</body>
+</html>

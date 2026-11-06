@@ -1,0 +1,117 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+
+p {
+    font-family: Arial, sans-serif;
+    color:burlywood;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+h1 {
+    font-family: Arial, sans-serif;
+    color: royalblue;
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+/* #banner, #content, #supporting, #footer{
+    padding: 10px;
+} */
+
+.text-container{
+    padding: 5px;
+}
+
+
+#banner{
+    background-color: rgba(128, 128,0, 0.5);
+    text-align: center;
+    height: 100px;
+    width: 1000px;
+    clear:both;
+    position:fixed;
+}
+
+#banner-placeholder{
+    height: 100px;
+}
+
+
+.container{
+    overflow: hidden;
+}
+
+#nav {
+    /* background-color: lightgray; */
+    width: 150px;
+    /* float: left; */
+    position:fixed;
+}
+
+#nav-placeholder{
+    height: 500px;
+    width: 150px;
+    float: left;
+}
+
+ul{
+    padding-left: 0;
+}
+
+li{
+    display:block;
+    background-color: lightgray;
+    margin-top:5px;
+    padding-top:5px;
+    padding-bottom:5px;
+    text-align:center;
+
+}
+
+/* :hover: pseudo-class */
+
+li:hover{ /*mouseover*/
+    background-color: pink;
+}
+
+li a{
+    text-decoration:none;
+    color: black;
+    /* display:block; */
+}
+
+#content {
+    /* background-color:beige; */
+    width: 700px;
+    float:left;
+}
+
+#supporting {
+    background-color: lightpink;
+    width: 150px;
+    float:left;
+}
+
+
+section {
+    height:500px;
+    /* padding-top:100px;
+    margin-top:-100px; */
+    scroll-margin-top: 100px;
+}
+
+#footer {
+    background-color: darkgrey;
+    text-align: center;
+    width: 1000px;
+    clear:both;
+}

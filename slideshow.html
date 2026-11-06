@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 滿版滑頁</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        main { transition: transform 0.6s ease; }
+        section {
+            height: 100vh;
+            display: grid;
+            place-items: center;
+            color: white;
+            font: bold 48px sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section style="background: #b34848;">第一頁</section>
+        <section style="background: #326b9b;">第二頁</section>
+        <section style="background: #39735a;">第三頁</section>
+        <section style="background: #75529b;">第四頁</section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        // 核心設計：把所有 section 排成一長條，再移動整個 main 來換頁。
+        // body 的 overflow: hidden 隱藏超出視窗的內容，也停用一般頁面捲動。
+        // JS 決定移動到哪裡；CSS transition 負責產生 0.6 秒的滑動動畫。
+        let page = 0;       // 目前頁碼從 0 起算：0 是第一頁，1 是第二頁。
+        let busy = false;   // 換頁鎖定：短時間內只接受一次捲動。
+
+        // wheel 是滑鼠滾輪或觸控板的捲動事件。
+        $(window).on('wheel', function (event) {
+            // originalEvent 取得原生事件；deltaY > 0 往下，< 0 往上。
+            const delta = event.originalEvent.deltaY;
+            // 鎖定期間或沒有垂直捲動時，直接結束這次處理。
+            if (busy || delta === 0) return;
+
+            // 只看方向，不看捲動距離：往下加一頁，往上減一頁。
+            page += delta > 0 ? 1 : -1;
+            // 將頁碼限制在 0 到總頁數減 1，避免滑出第一頁或最後一頁。
+            page = Math.max(0, Math.min(page, $('section').length - 1));
+
+            // 每頁高 100vh，因此第 0、1、2 頁分別移到 0、-100、-200vh。
+            // 負值表示 main 往上移，讓下方的頁面進入視窗。
+            $('main').css('transform', 'translateY(-' + page * 100 + 'vh)');
+
+            // 捲動一次可能連續觸發多個 wheel 事件，先鎖定 800 毫秒。
+            // 比 600 毫秒的動畫稍長，減少連續跳頁；時間到後才能再次換頁。
+            busy = true;
+            setTimeout(function () { busy = false; }, 800);
+        });
+    </script>
+</body>
+</html>

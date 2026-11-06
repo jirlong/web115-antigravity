@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數位新聞｜原生滑頁</title>
+    <style>
+        :root { --screen: 100vh; color-scheme: dark; }
+        @supports (height: 100dvh) {
+            :root { --screen: 100dvh; }
+        }
+        * { box-sizing: border-box; }
+        [hidden] { display: none !important; }
+        body { margin: 0; background: #285540; color: #fff; font-family: system-ui, sans-serif; }
+
+        /* 捲動容器決定吸附規則，section 決定吸附位置。
+           200vh 的 section 大於視窗，瀏覽器允許在其內部自由捲動。 */
+        .story {
+            height: var(--screen);
+            overflow-y: auto;
+            position: relative;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            overscroll-behavior-y: contain;
+        }
+        .scene {
+            min-height: var(--screen);
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            background: var(--color);
+        }
+        .scene--long { min-height: calc(var(--screen) * 2); }
+        .panel {
+            min-height: var(--screen);
+            display: grid;
+            place-content: center;
+            padding: 4rem 2rem 7rem;
+            text-align: center;
+        }
+        .panel--dark { background: #285540; }
+        h1, h2 { margin: 0 0 1rem; font-size: clamp(2rem, 6vw, 4rem); }
+        p { max-width: 36rem; margin: .5rem auto; line-height: 1.8; font-size: 1.1rem; }
+        .eyebrow { font-size: .8rem; letter-spacing: .15em; opacity: .8; }
+
+        .navigation {
+            position: fixed;
+            bottom: max(1rem, env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: .25rem;
+            padding: .5rem;
+            border: 1px solid #ffffff40;
+            border-radius: 3rem;
+            background: #161c21e6;
+        }
+        button {
+            border: 0;
+            border-radius: 50%;
+            width: 2.25rem;
+            height: 2.25rem;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+        }
+        button[aria-current="step"] { background: white; color: #161c21; }
+        button:hover { background: #ffffff30; }
+        button[aria-current="step"]:hover { background: #ddd; }
+        button:focus-visible { outline: 3px solid #ffd67a; outline-offset: 2px; }
+        .story:focus-visible { outline: 3px solid #ffd67a; outline-offset: -3px; }
+        .page-count { padding: 0 .5rem; font-size: .8rem; white-space: nowrap; }
+        /* 減少動態效果偏好：停用平滑動畫，改成較寬鬆的吸附。 */
+        @media (prefers-reduced-motion: reduce) {
+            .story { scroll-behavior: auto; scroll-snap-type: y proximity; }
+        }
+    </style>
+</head>
+<body>
+    <main class="story" tabindex="0" aria-label="五頁數位新聞，可捲動或使用 Page Up、Page Down 換屏">
+        <section class="scene" id="page-1" aria-labelledby="title-1" style="--color: #b34848;">
+            <div class="panel">
+                <p class="eyebrow">DIGITAL STORY / 01</p>
+                <h1 id="title-1">第一頁</h1>
+                <p>捲動滑鼠或滑動觸控螢幕，進入下一頁。</p>
+            </div>
+        </section>
+        <section class="scene" id="page-2" aria-labelledby="title-2" style="--color: #326b9b;">
+            <div class="panel">
+                <p class="eyebrow">DIGITAL STORY / 02</p>
+                <h2 id="title-2">第二頁</h2>
+                <p>滑動結束時，由瀏覽器將畫面吸附到頁面邊界。</p>
+            </div>
+        </section>
+        <!-- 只有外層 section 有 snap；兩個 panel 不設吸附點，才能自由閱讀長頁。 -->
+        <section class="scene scene--long" id="page-3" aria-labelledby="title-3" style="--color: #39735a;">
+            <div class="panel">
+                <p class="eyebrow">DIGITAL STORY / 03 — 上半部</p>
+                <h2 id="title-3">第三頁</h2>
+                <p>這一頁有兩個視窗高，保留一般捲動，逐步閱讀內容。</p>
+            </div>
+            <div class="panel panel--dark">
+                <p class="eyebrow">DIGITAL STORY / 03 — 下半部</p>
+                <h2>故事繼續</h2>
+                <p>讀完下半部後，繼續往下捲，便會滑入第四頁。</p>
+            </div>
+        </section>
+        <section class="scene" id="page-4" aria-labelledby="title-4" style="--color: #75529b;">
+            <div class="panel">
+                <p class="eyebrow">DIGITAL STORY / 04</p>
+                <h2 id="title-4">第四頁</h2>
+                <p>回到一個視窗高的版面，繼續整頁滑入。</p>
+            </div>
+        </section>
+        <section class="scene" id="page-5" aria-labelledby="title-5" style="--color: #946021;">
+            <div class="panel">
+                <p class="eyebrow">DIGITAL STORY / 05</p>
+                <h2 id="title-5">第五頁</h2>
+                <p>故事結束。往上捲動，可以回到前面的內容。</p>
+            </div>
+        </section>
+    </main>
+
+    <nav class="navigation" aria-label="新聞頁面導覽" hidden>
+        <button type="button" data-page="0" aria-label="前往第一頁" aria-controls="page-1">1</button>
+        <button type="button" data-page="1" aria-label="前往第二頁" aria-controls="page-2">2</button>
+        <button type="button" data-page="2" aria-label="前往第三頁" aria-controls="page-3">3</button>
+        <button type="button" data-page="3" aria-label="前往第四頁" aria-controls="page-4">4</button>
+        <button type="button" data-page="4" aria-label="前往第五頁" aria-controls="page-5">5</button>
+        <output class="page-count" aria-live="polite" aria-atomic="true">1 / 5</output>
+    </nav>
+
+    <script type="module">
+        /**
+         * 架構分工：
+         * CSS Scroll Snap 處理滾輪、觸控與吸附，不攔截 wheel，也不設定動畫鎖。
+         * 控制器只處理導覽、鍵盤與頁碼，停用 JS 後仍能閱讀整篇新聞。
+         */
+        class StoryController {
+            constructor(root, navigation) {
+                this.root = root;
+                this.navigation = navigation;
+                this.scenes = [...root.querySelectorAll('.scene')];
+                this.buttons = [...navigation.querySelectorAll('[data-page]')];
+                this.counter = navigation.querySelector('output');
+                this.motion = matchMedia('(prefers-reduced-motion: reduce)');
+                this.events = new AbortController();
+                this.frame = 0;
+                this.activeIndex = -1;
+
+                const { signal } = this.events;
+                root.addEventListener('scroll', () => this.scheduleUpdate(), { passive: true, signal });
+                root.addEventListener('keydown', event => this.onKeydown(event), { signal });
+                navigation.addEventListener('click', event => {
+                    const button = event.target.closest('[data-page]');
+                    if (button) this.goTo(Number(button.dataset.page));
+                }, { signal });
+
+                // 視窗與內容高度改變時，重新依實際畫面同步頁碼。
+                this.resizeObserver = new ResizeObserver(() => this.scheduleUpdate());
+                this.resizeObserver.observe(root);
+                this.scenes.forEach(scene => this.resizeObserver.observe(scene));
+                navigation.hidden = false;
+                this.update();
+            }
+
+            scrollTo(top) {
+                this.root.scrollTo({ top, behavior: this.motion.matches ? 'instant' : 'smooth' });
+            }
+
+            goTo(index) {
+                const scene = this.scenes[index];
+                if (scene) this.scrollTo(scene.offsetTop);
+            }
+
+            onKeydown(event) {
+                // 僅在捲動容器本身獲得焦點時接管快捷鍵，保留內部互動元件的鍵盤操作。
+                if (event.target !== this.root) return;
+                let top;
+                switch (event.key) {
+                    case 'PageDown': top = this.root.scrollTop + this.root.clientHeight; break;
+                    case 'PageUp': top = this.root.scrollTop - this.root.clientHeight; break;
+                    case 'Home': top = 0; break;
+                    case 'End': top = this.root.scrollHeight - this.root.clientHeight; break;
+                    default: return;
+                }
+                event.preventDefault();
+                this.scrollTo(top);
+            }
+
+            scheduleUpdate() {
+                // 一個繪製影格最多更新一次，避免每個 scroll 事件都重算版面。
+                if (this.frame) return;
+                this.frame = requestAnimationFrame(() => {
+                    this.frame = 0;
+                    this.update();
+                });
+            }
+
+            update() {
+                // 以視窗中央落在哪個 section 判斷當前頁。
+                // 使用實際元素位置，第三頁加長也不需要另寫頁碼公式。
+                const center = this.root.scrollTop + this.root.clientHeight / 2;
+                let index = 0;
+                this.scenes.forEach((scene, i) => {
+                    if (scene.offsetTop <= center) index = i;
+                });
+                if (index === this.activeIndex) return;
+                this.activeIndex = index;
+                this.buttons.forEach((button, i) => {
+                    if (i === index) button.setAttribute('aria-current', 'step');
+                    else button.removeAttribute('aria-current');
+                });
+                this.counter.textContent = `${index + 1} / ${this.scenes.length}`;
+            }
+
+            // 若整合到 SPA，可在元件卸載時呼叫，清除監聽與待執行的更新。
+            destroy() {
+                this.events.abort();
+                this.resizeObserver.disconnect();
+                cancelAnimationFrame(this.frame);
+                this.navigation.hidden = true;
+            }
+        }
+
+        new StoryController(document.querySelector('.story'), document.querySelector('.navigation'));
+    </script>
+</body>
+</html>

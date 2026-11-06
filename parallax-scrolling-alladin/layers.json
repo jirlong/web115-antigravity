@@ -1,0 +1,51 @@
+[
+  {
+    "scene": 2,
+    "name": "city",
+    "layers": {
+      "background": "city.jpg",
+      "midground": "city-roofs.png",
+      "hero": "city-riders.png",
+      "foreground": "arch-frame.png"
+    }
+  },
+  {
+    "scene": 3,
+    "name": "clouds",
+    "layers": {
+      "background": "cloud-sky.jpg",
+      "midground": "cloud-bank.png",
+      "hero": "cloud-riders.png",
+      "foreground": "cloud-bank.png"
+    }
+  },
+  {
+    "scene": 4,
+    "name": "world",
+    "layers": {
+      "background": "night-sky.jpg",
+      "midground": "pyramids.png",
+      "hero": "travel-riders.png",
+      "foreground": "sphinx.png"
+    }
+  },
+  {
+    "scene": 5,
+    "name": "garden",
+    "layers": {
+      "background": "garden-sky.jpg",
+      "midground": "pavilion.png",
+      "hero": "pond-riders.png",
+      "foreground": "water-ripples.png"
+    }
+  },
+  {
+    "scene": 6,
+    "name": "finale",
+    "layers": {
+      "background": "fireworks-sky.jpg",
+      "midground": "palace.png",
+      "hero": "resting-riders.png"
+    }
+  }
+]

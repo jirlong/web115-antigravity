@@ -1,0 +1,128 @@
+{
+  "old_html_bytes": 18899250,
+  "new_html_bytes": 996609,
+  "separate_html_bytes": 5027,
+  "reduction_percent": 94.7,
+  "assets": [
+    {
+      "source": "fireworks-sky.png",
+      "source_bytes": 161748,
+      "new": "fireworks-sky.jpg",
+      "new_bytes": 32125
+    },
+    {
+      "source": "cloud-riders.svg",
+      "source_bytes": 596418,
+      "new": "cloud-riders.png",
+      "new_bytes": 58661
+    },
+    {
+      "source": "railing.svg",
+      "source_bytes": 1650428,
+      "new": "railing.png",
+      "new_bytes": 22824
+    },
+    {
+      "source": "water-ripples.svg",
+      "source_bytes": 621473,
+      "new": "water-ripples.png",
+      "new_bytes": 3746
+    },
+    {
+      "source": "aladdin.svg",
+      "source_bytes": 1600098,
+      "new": "aladdin.png",
+      "new_bytes": 30608
+    },
+    {
+      "source": "city.png",
+      "source_bytes": 533439,
+      "new": "city.jpg",
+      "new_bytes": 109395
+    },
+    {
+      "source": "cloud-sky.png",
+      "source_bytes": 176962,
+      "new": "cloud-sky.jpg",
+      "new_bytes": 38556
+    },
+    {
+      "source": "resting-riders.svg",
+      "source_bytes": 781893,
+      "new": "resting-riders.png",
+      "new_bytes": 33934
+    },
+    {
+      "source": "pavilion.svg",
+      "source_bytes": 621514,
+      "new": "pavilion.png",
+      "new_bytes": 34390
+    },
+    {
+      "source": "night-sky.png",
+      "source_bytes": 11821,
+      "new": "night-sky.jpg",
+      "new_bytes": 2950
+    },
+    {
+      "source": "city-roofs.svg",
+      "source_bytes": 809000,
+      "new": "city-roofs.png",
+      "new_bytes": 16759
+    },
+    {
+      "source": "pyramids.svg",
+      "source_bytes": 518880,
+      "new": "pyramids.png",
+      "new_bytes": 27406
+    },
+    {
+      "source": "arch-frame.svg",
+      "source_bytes": 350559,
+      "new": "arch-frame.png",
+      "new_bytes": 16491
+    },
+    {
+      "source": "travel-riders.svg",
+      "source_bytes": 355350,
+      "new": "travel-riders.png",
+      "new_bytes": 5709
+    },
+    {
+      "source": "garden-sky.png",
+      "source_bytes": 224920,
+      "new": "garden-sky.jpg",
+      "new_bytes": 46144
+    },
+    {
+      "source": "city-riders.svg",
+      "source_bytes": 826028,
+      "new": "city-riders.png",
+      "new_bytes": 18047
+    },
+    {
+      "source": "palace.svg",
+      "source_bytes": 581932,
+      "new": "palace.png",
+      "new_bytes": 30109
+    },
+    {
+      "source": "pond-riders.svg",
+      "source_bytes": 621754,
+      "new": "pond-riders.png",
+      "new_bytes": 11744
+    },
+    {
+      "source": "sphinx.svg",
+      "source_bytes": 675502,
+      "new": "sphinx.png",
+      "new_bytes": 35748
+    },
+    {
+      "source": "cloud-bank.svg",
+      "source_bytes": 355279,
+      "new": "cloud-bank.png",
+      "new_bytes": 20935
+    }
+  ]
+}

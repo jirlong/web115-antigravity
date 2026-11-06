@@ -1,0 +1,1390 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>國立臺灣大學新聞研究所 | Graduate Institute of Journalism, NTU</title>
+    <meta name="description" content="國立臺灣大學新聞研究所入口首頁：培育兼具批判思考、調查報導深度與全媒體數位敘事能力的新時代新聞專業人才。">
+
+    <!-- Google Fonts: Noto Serif TC (權威感標題) & Noto Sans TC (現代易讀內文) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5.3.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --ntu-primary: #7d1128;      /* 臺大經典深紅/棗紅 */
+            --ntu-primary-dark: #580a1b; /* 深酒紅 */
+            --ntu-gold: #c99738;         /* 典雅金色 */
+            --ntu-gold-hover: #b3832c;
+            --ntu-dark: #1b2028;         /* 深墨色 */
+            --ntu-charcoal: #2c333f;
+            --ntu-light: #f8fafc;
+            --font-serif: 'Noto Serif TC', Georgia, serif;
+            --font-sans: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: #334155;
+            background-color: #fbfbfd;
+            line-height: 1.7;
+        }
+
+        /* 標題字型使用襯線體，彰顯新聞公信力與學術底蘊 */
+        h1, h2, h3, .font-serif, .navbar-brand {
+            font-family: var(--font-serif);
+        }
+
+        /* 頂部輔助列 */
+        .top-bar {
+            background-color: #12161d;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .top-bar a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .top-bar a:hover {
+            color: #ffffff;
+        }
+
+        /* 主導覽列 */
+        .main-navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--ntu-primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .navbar-brand .logo-sub {
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            font-family: var(--font-sans);
+            color: #64748b;
+            display: block;
+            font-weight: 500;
+        }
+        .navbar-brand .logo-main {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--ntu-primary);
+            letter-spacing: 0.5px;
+        }
+        .nav-link {
+            font-weight: 500;
+            color: #1e293b !important;
+            padding: 0.75rem 1rem !important;
+            position: relative;
+            transition: color 0.2s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--ntu-primary) !important;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--ntu-primary);
+            transition: width 0.25s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 60%;
+        }
+
+        /* 典雅紅按鈕 */
+        .btn-ntu {
+            background-color: var(--ntu-primary);
+            color: #fff;
+            border: 1px solid var(--ntu-primary);
+            font-weight: 600;
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+        }
+        .btn-ntu:hover {
+            background-color: var(--ntu-primary-dark);
+            border-color: var(--ntu-primary-dark);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(125, 17, 40, 0.25);
+        }
+        .btn-ntu-outline {
+            background-color: transparent;
+            color: var(--ntu-primary);
+            border: 2px solid var(--ntu-primary);
+            font-weight: 600;
+            padding: 0.55rem 1.35rem;
+            border-radius: 6px;
+            transition: all 0.25s;
+        }
+        .btn-ntu-outline:hover {
+            background-color: var(--ntu-primary);
+            color: #fff;
+        }
+
+        /* Hero 視覺區 */
+        .hero-banner {
+            position: relative;
+            background: linear-gradient(135deg, rgba(18, 22, 29, 0.94) 0%, rgba(88, 10, 27, 0.90) 100%),
+                        url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            color: white;
+            padding: 5.5rem 0 5rem;
+            overflow: hidden;
+        }
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, #fbfbfd, transparent);
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(201, 151, 56, 0.2);
+            border: 1px solid rgba(201, 151, 56, 0.5);
+            color: #fce7b0;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.25rem;
+        }
+        .hero-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 900;
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.5px;
+        }
+        .hero-desc {
+            font-size: 1.15rem;
+            color: #e2e8f0;
+            max-width: 680px;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        .hero-stat-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        .hero-stat-box:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .hero-stat-number {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fcd34d;
+            line-height: 1;
+            margin-bottom: 0.35rem;
+        }
+        .hero-stat-label {
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        /* 快捷入口卡片 (Portal Cards) */
+        .portal-grid-section {
+            margin-top: -3.5rem;
+            position: relative;
+            z-index: 10;
+        }
+        .portal-card {
+            background: #fff;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            height: 100%;
+        }
+        .portal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 30px -5px rgba(125, 17, 40, 0.12);
+            border-color: var(--ntu-gold);
+            color: inherit;
+        }
+        .portal-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: #fff4f6;
+            color: var(--ntu-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        .portal-card:hover .portal-icon {
+            background: var(--ntu-primary);
+            color: #fff;
+        }
+        .portal-card-title {
+            font-size: 1.08rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: #1e293b;
+        }
+        .portal-card-text {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* 區塊標題 */
+        .section-header {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        .section-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--ntu-gold);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 900;
+            color: #0f172a;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 45px;
+            height: 3px;
+            background: var(--ntu-primary);
+            border-radius: 2px;
+        }
+        .section-header-center .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* 最新消息切換頁籤 */
+        .news-pill-btn {
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            color: #475569;
+            font-size: 0.88rem;
+            font-weight: 500;
+            padding: 0.45rem 1.1rem;
+            border-radius: 50px;
+            transition: all 0.2s;
+            margin-right: 0.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .news-pill-btn:hover, .news-pill-btn.active {
+            background: var(--ntu-primary);
+            border-color: var(--ntu-primary);
+            color: #fff;
+        }
+        .news-item {
+            padding: 1.15rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            border-radius: 8px;
+            transition: background 0.2s ease, transform 0.2s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        .news-item:hover {
+            background-color: #f8fafc;
+            transform: translateX(4px);
+            color: inherit;
+        }
+        .news-date {
+            font-size: 0.82rem;
+            color: #64748b;
+            font-weight: 500;
+            min-width: 95px;
+        }
+        .news-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 4px;
+        }
+        .news-title {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0;
+            transition: color 0.2s;
+        }
+        .news-item:hover .news-title {
+            color: var(--ntu-primary);
+        }
+
+        /* 焦點專題報導卡片 */
+        .story-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .story-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.1);
+        }
+        .story-img-wrap {
+            position: relative;
+            padding-top: 60%;
+            overflow: hidden;
+            background-color: #e2e8f0;
+        }
+        .story-img-wrap img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .story-card:hover .story-img-wrap img {
+            transform: scale(1.05);
+        }
+        .story-category {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(18, 22, 29, 0.85);
+            backdrop-filter: blur(4px);
+            color: #fce7b0;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+        }
+        .story-body {
+            padding: 1.4rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .story-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            line-height: 1.4;
+            color: #0f172a;
+        }
+        .story-meta {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: auto;
+            padding-top: 0.8rem;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        /* 師資卡片 */
+        .faculty-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        .faculty-card:hover {
+            border-color: var(--ntu-primary);
+            box-shadow: 0 10px 25px rgba(125, 17, 40, 0.08);
+            transform: translateY(-4px);
+        }
+        .faculty-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            object-fit: cover;
+            border: 3px solid #f1f5f9;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+        .faculty-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.2rem;
+        }
+        .faculty-title {
+            font-size: 0.82rem;
+            color: var(--ntu-primary);
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+        .faculty-research {
+            font-size: 0.8rem;
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+        }
+
+        /* 特色宣傳條 (Features Banner) */
+        .features-banner {
+            background: linear-gradient(135deg, #181d26 0%, #261118 100%);
+            color: #fff;
+            padding: 4.5rem 0;
+            position: relative;
+        }
+        .feature-icon-box {
+            font-size: 2rem;
+            color: var(--ntu-gold);
+            margin-bottom: 1rem;
+        }
+
+        /* 頁尾 */
+        .footer-main {
+            background-color: #0f131a;
+            color: #94a3b8;
+            padding: 4rem 0 2rem;
+            font-size: 0.9rem;
+            border-top: 3px solid var(--ntu-primary);
+        }
+        .footer-title {
+            color: #fff;
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.5px;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s, padding-left 0.2s;
+            display: inline-block;
+        }
+        .footer-links a:hover {
+            color: #f8fafc;
+            padding-left: 4px;
+        }
+        .social-link {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: #cbd5e1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            margin-right: 0.5rem;
+            transition: all 0.2s;
+        }
+        .social-link:hover {
+            background: var(--ntu-primary);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* 回到頂部按鈕 */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--ntu-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        #backToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #backToTopBtn:hover {
+            background: var(--ntu-primary-dark);
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. 頂部輔助列 (Top Utility Bar) -->
+    <div class="top-bar py-2">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div class="d-flex align-items-center gap-3">
+                <a href="https://www.ntu.edu.tw" target="_blank" rel="noopener"><i class="bi bi-mortarboard-fill me-1"></i>臺大首頁</a>
+                <span class="text-secondary opacity-50">|</span>
+                <a href="https://coss.ntu.edu.tw" target="_blank" rel="noopener">社會科學院</a>
+                <span class="text-secondary opacity-50">|</span>
+                <a href="#student-media"><i class="bi bi-broadcast me-1 text-warning"></i>新聞 E 論壇</a>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <a href="#contact"><i class="bi bi-geo-alt me-1"></i>交通與聯絡</a>
+                <span class="text-secondary opacity-50">|</span>
+                <a href="javascript:void(0)" onclick="alert('English version is under maintenance.')"><i class="bi bi-globe me-1"></i>English</a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-outline-light py-0 px-2" style="font-size: 0.75rem;" data-bs-toggle="modal" data-bs-target="#searchModal">
+                    <i class="bi bi-search me-1"></i>搜尋
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. 主導覽列 (Sticky Navbar) -->
+    <nav class="navbar navbar-expand-lg sticky-top main-navbar" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-3 py-2" href="#">
+                <div class="bg-danger text-white rounded p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background-color: var(--ntu-primary) !important;">
+                    <i class="bi bi-newspaper fs-4"></i>
+                </div>
+                <div>
+                    <span class="logo-main">國立臺灣大學新聞研究所</span>
+                    <span class="logo-sub">GRADUATE INSTITUTE OF JOURNALISM, NTU</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">首頁</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            本所簡介
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm">
+                            <li><a class="dropdown-item py-2" href="#about-us"><i class="bi bi-info-circle me-2 text-danger"></i>成立宗旨與沿革</a></li>
+                            <li><a class="dropdown-item py-2" href="#features"><i class="bi bi-stars me-2 text-warning"></i>教學特色與設備</a></li>
+                            <li><a class="dropdown-item py-2" href="#contact"><i class="bi bi-geo-alt me-2 text-primary"></i>交通位置地圖</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#news-section">最新消息</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faculty-section">師資陣容</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            課程與實作
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm">
+                            <li><a class="dropdown-item py-2" href="#academics"><i class="bi bi-journal-bookmark me-2 text-danger"></i>碩士班修業規章</a></li>
+                            <li><a class="dropdown-item py-2" href="#academics"><i class="bi bi-diagram-3 me-2 text-success"></i>全媒體數位實作學程</a></li>
+                            <li><a class="dropdown-item py-2" href="#student-media"><i class="bi bi-camera-reels me-2 text-info"></i>學生實作媒體平台</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#student-media">焦點專題</a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <a class="btn btn-ntu d-inline-flex align-items-center gap-1 shadow-sm" href="#admissions-section">
+                            <i class="bi bi-mortarboard"></i> 招生專區
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. Hero 視覺橫幅 -->
+    <header class="hero-banner">
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-8">
+                    <div class="hero-badge">
+                        <i class="bi bi-award-fill"></i> 培育臺灣與亞洲頂尖新聞傳播專業人才
+                    </div>
+                    <h1 class="hero-title">
+                        深耕公共精神・探索數位敘事<br>
+                        引領當代新聞變革
+                    </h1>
+                    <p class="hero-desc">
+                        自 1991 年創立以來，臺大新聞所秉持批判思考與社會關懷，結合嚴謹調查報導訓練、現代數據視覺化與生成式科技傳播，培養具備國際視野的新聞領導者。
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#admissions-section" class="btn btn-ntu btn-lg px-4 py-2 fs-6">
+                            <i class="bi bi-pencil-square me-2"></i>115學年度碩士班甄試與入學
+                        </a>
+                        <a href="#student-media" class="btn btn-outline-light btn-lg px-4 py-2 fs-6">
+                            <i class="bi bi-play-circle me-2"></i>瀏覽學生深度報導
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 英雄區右側數據徽章 -->
+                <div class="col-lg-4">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="hero-stat-box">
+                                <div class="hero-stat-number">1991</div>
+                                <div class="hero-stat-label">創所年份・深耕30載</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="hero-stat-box">
+                                <div class="hero-stat-number">100%</div>
+                                <div class="hero-stat-label">全媒體實戰採訪訓練</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="hero-stat-box">
+                                <div class="hero-stat-number">50+</div>
+                                <div class="hero-stat-label">歷屆卓越新聞獎得主</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="hero-stat-box">
+                                <div class="hero-stat-number">1:8</div>
+                                <div class="hero-stat-label">頂尖師生比精緻教學</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 4. 快捷入口專區 (Quick Portal Services) -->
+    <section class="portal-grid-section">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-md-6 col-lg-3">
+                    <a href="#admissions-section" class="portal-card">
+                        <div class="portal-icon">
+                            <i class="bi bi-file-earmark-person"></i>
+                        </div>
+                        <div>
+                            <div class="portal-card-title">碩士班招生</div>
+                            <p class="portal-card-text">推甄考試、筆試簡章、歷屆試題與報考常見問題解答</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#academics" class="portal-card">
+                        <div class="portal-icon">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <div>
+                            <div class="portal-card-title">課程與修業規章</div>
+                            <p class="portal-card-text">修課地圖、實作學分、學位論文與口試審查辦法規範</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#student-media" class="portal-card">
+                        <div class="portal-icon">
+                            <i class="bi bi-camera-video"></i>
+                        </div>
+                        <div>
+                            <div class="portal-card-title">新聞 E 論壇</div>
+                            <p class="portal-card-text">學生實務採訪媒體，產製文字專題、影音專題與數據新聞</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#news-section" class="portal-card">
+                        <div class="portal-icon">
+                            <i class="bi bi-mic"></i>
+                        </div>
+                        <div>
+                            <div class="portal-card-title">專題演講與研討</div>
+                            <p class="portal-card-text">每週三客座學者、國際特派員與第一線調查記者專題分享</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 最新消息與焦點活動 (News & Announcements) -->
+    <section class="py-5 mt-4" id="news-section">
+        <div class="container py-3">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+                <div class="section-header mb-md-0">
+                    <span class="section-tag">LATEST UPDATES</span>
+                    <h2 class="section-title">最新消息與學術動態</h2>
+                </div>
+                <!-- 篩選按鈕 -->
+                <div class="d-flex flex-wrap" id="newsFilters">
+                    <button class="news-pill-btn active" onclick="filterNews('all', this)">全部消息</button>
+                    <button class="news-pill-btn" onclick="filterNews('admission', this)">招生專區</button>
+                    <button class="news-pill-btn" onclick="filterNews('lecture', this)">講座活動</button>
+                    <button class="news-pill-btn" onclick="filterNews('scholarship', this)">獎助學金</button>
+                    <button class="news-pill-btn" onclick="filterNews('academic', this)">教務行政</button>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- 左側精選焦點消息大卡片 -->
+                <div class="col-lg-5">
+                    <div class="card border-0 shadow-sm h-100 overflow-hidden" style="border-radius: 12px; border: 1px solid #e2e8f0;">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="招生焦點" style="height: 220px; object-fit: cover;">
+                            <span class="badge bg-danger position-absolute top-0 end-0 m-3 px-3 py-2">熱門置頂</span>
+                        </div>
+                        <div class="card-body p-4 d-flex flex-column">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <span class="badge bg-danger-subtle text-danger font-monospace">招生資訊</span>
+                                <small class="text-muted"><i class="bi bi-clock me-1"></i>2026-10-15</small>
+                            </div>
+                            <h3 class="h5 card-title fw-bold text-dark mb-3">
+                                115 學年度臺大新聞研究所碩士班甄試口試時間表及注意事項公告
+                            </h3>
+                            <p class="card-text text-secondary mb-4" style="font-size: 0.92rem;">
+                                通過第一階段審查之考生名單已正式發布，口試預計於新聞研究所大樓舉行。請考生詳閱報到時間及口試規則說明。
+                            </p>
+                            <div class="mt-auto">
+                                <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#announcementModal">
+                                    閱讀詳細簡章 <i class="bi bi-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側消息清單 -->
+                <div class="col-lg-7">
+                    <div class="bg-white rounded-3 p-3 shadow-sm border border-light-subtle">
+                        <div class="news-list" id="newsList">
+                            <!-- 項目 1 -->
+                            <a href="javascript:void(0)" class="news-item" data-category="admission" data-bs-toggle="modal" data-bs-target="#announcementModal">
+                                <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="news-date font-monospace">2026.10.12</span>
+                                        <span class="news-badge bg-danger text-white">招生</span>
+                                        <span class="news-title">115學年度碩士在職專班與碩士班入學招生說明會即日起開放線上報名</span>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted d-none d-sm-block"></i>
+                                </div>
+                            </a>
+
+                            <!-- 項目 2 -->
+                            <a href="javascript:void(0)" class="news-item" data-category="lecture" data-bs-toggle="modal" data-bs-target="#announcementModal">
+                                <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="news-date font-monospace">2026.10.08</span>
+                                        <span class="news-badge bg-warning-subtle text-dark">講座</span>
+                                        <span class="news-title">【週三論壇】生成式 AI 與事實查核的實踐防線／主講人：資深查核中心總編導</span>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted d-none d-sm-block"></i>
+                                </div>
+                            </a>
+
+                            <!-- 項目 3 -->
+                            <a href="javascript:void(0)" class="news-item" data-category="scholarship" data-bs-toggle="modal" data-bs-target="#announcementModal">
+                                <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="news-date font-monospace">2026.10.01</span>
+                                        <span class="news-badge bg-success-subtle text-success">獎助</span>
+                                        <span class="news-title">財團法人卓越新聞獎基金會新聞實務獎助學金申請受理至 11 月 15 日止</span>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted d-none d-sm-block"></i>
+                                </div>
+                            </a>
+
+                            <!-- 項目 4 -->
+                            <a href="javascript:void(0)" class="news-item" data-category="academic" data-bs-toggle="modal" data-bs-target="#announcementModal">
+                                <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="news-date font-monospace">2026.09.28</span>
+                                        <span class="news-badge bg-primary-subtle text-primary">教務</span>
+                                        <span class="news-title">114學年度第1學期碩士學位考試申請期限及論文格式審查規定公佈</span>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted d-none d-sm-block"></i>
+                                </div>
+                            </a>
+
+                            <!-- 項目 5 -->
+                            <a href="javascript:void(0)" class="news-item" data-category="lecture" data-bs-toggle="modal" data-bs-target="#announcementModal">
+                                <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="news-date font-monospace">2026.09.20</span>
+                                        <span class="news-badge bg-warning-subtle text-dark">講座</span>
+                                        <span class="news-title">國際特派員工作坊：戰地與氣候變遷跨國深度調查報導經驗談</span>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted d-none d-sm-block"></i>
+                                </div>
+                            </a>
+
+                            <!-- 項目 6 -->
+                            <a href="javascript:void(0)" class="news-item" data-category="academic" data-bs-toggle="modal" data-bs-target="#announcementModal">
+                                <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="news-date font-monospace">2026.09.15</span>
+                                        <span class="news-badge bg-info-subtle text-info-emphasis">交流</span>
+                                        <span class="news-title">115學年赴海外知名傳播學院（香港、歐洲、美國）交換學生申請辦法說明</span>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted d-none d-sm-block"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 學生實作媒體平台「新聞 E 論壇」成果專區 (Student Media Showcase) -->
+    <section class="py-5 bg-light" id="student-media">
+        <div class="container py-3">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+                <div class="section-header mb-md-0">
+                    <span class="section-tag">INVESTIGATIVE & DIGITAL JOURNALISM</span>
+                    <h2 class="section-title">學生實作媒體・新聞 E 論壇</h2>
+                </div>
+                <p class="text-secondary mb-0 max-w-md" style="max-width: 460px; font-size: 0.92rem;">
+                    臺大新聞所強調「做中學」，每一篇報導均由學生自主企劃、實地採訪、跨媒材製作，接受專任教師與資深業界導師嚴謹編輯把關。
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <!-- 專題 1: 調查報導 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="story-card">
+                        <div class="story-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="綠能專題">
+                            <span class="story-category">深度調查</span>
+                        </div>
+                        <div class="story-body">
+                            <h3 class="story-title">
+                                穿透光電板的綠能矛盾：西南沿海養殖與生態棲地的拉鋸實錄
+                            </h3>
+                            <p class="text-muted" style="font-size: 0.88rem; line-height: 1.6;">
+                                採訪團隊歷時三個月走訪雲嘉南沿海，透過田野訪談、無人機航拍與地方治理分析，剖析漁電共生案場實質困境。
+                            </p>
+                            <div class="story-meta d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-person me-1"></i>採訪團隊：林以婕、陳冠宇</span>
+                                <span class="text-primary fw-medium"><i class="bi bi-eye me-1"></i>2.4k</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 專題 2: 數據新聞 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="story-card">
+                        <div class="story-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" alt="租屋數據">
+                            <span class="story-category">數據新聞視覺化</span>
+                        </div>
+                        <div class="story-body">
+                            <h3 class="story-title">
+                                大學生的租屋地圖：雙北十萬筆租金數據與青年居住負擔分析
+                            </h3>
+                            <p class="text-muted" style="font-size: 0.88rem; line-height: 1.6;">
+                                爬取雙北三大租屋平台資料，利用 Python 進行空間分析，結合互動地圖呈現學生在外租屋的真實經濟壓力。
+                            </p>
+                            <div class="story-meta d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-person me-1"></i>製作：數據新聞實驗小組</span>
+                                <span class="text-primary fw-medium"><i class="bi bi-eye me-1"></i>3.8k</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 專題 3: 影音與Podcast -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="story-card">
+                        <div class="story-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=800&q=80" alt="播客節目">
+                            <span class="story-category">影音與 Podcast</span>
+                        </div>
+                        <div class="story-body">
+                            <h3 class="story-title">
+                                【所聲無息】Podcast 第 24 集：當記者被演算法綁架，我們如何找回說真話的勇氣？
+                            </h3>
+                            <p class="text-muted" style="font-size: 0.88rem; line-height: 1.6;">
+                                專訪數位原生媒體總編輯，深入探討流量焦慮、社群演算同溫層對現代媒體新聞室產生的深遠衝擊。
+                            </p>
+                            <div class="story-meta d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-mic me-1"></i>主持：新聞所音訊團隊</span>
+                                <span class="text-primary fw-medium"><i class="bi bi-headphones me-1"></i>1.9k</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 查看更多按鈕 -->
+            <div class="text-center mt-5">
+                <a href="https://knownews.tw" target="_blank" rel="noopener" class="btn btn-ntu-outline px-4 py-2">
+                    <i class="bi bi-box-arrow-up-right me-2"></i>前往「新聞 E 論壇」官方平台瀏覽更多專題
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 師資陣容精選 (Distinguished Faculty) -->
+    <section class="py-5" id="faculty-section">
+        <div class="container py-3">
+            <div class="text-center mb-5">
+                <span class="section-tag">ACADEMIC & PROFESSIONAL EXCELLENCE</span>
+                <h2 class="section-title d-inline-block">師資陣容與業界專家</h2>
+                <p class="text-secondary mt-2">兼具傳播學術原創研究與實務新聞界第一線權威導師</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- 師資 1 -->
+                <div class="col-sm-6 col-lg-3">
+                    <div class="faculty-card">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="洪貞玲教授" class="faculty-avatar">
+                        <div class="faculty-name">洪貞玲</div>
+                        <div class="faculty-title">教授兼所長</div>
+                        <p class="faculty-research">傳播法律與政策、數位匯流法規、言論自由與人權傳播研究</p>
+                        <span class="badge bg-light text-secondary border">美國賓州州立大學法學博士</span>
+                    </div>
+                </div>
+
+                <!-- 師資 2 -->
+                <div class="col-sm-6 col-lg-3">
+                    <div class="faculty-card">
+                        <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=300&q=80" alt="林照真教授" class="faculty-avatar">
+                        <div class="faculty-name">林照真</div>
+                        <div class="faculty-title">名譽教授／客座講座</div>
+                        <p class="faculty-research">調查採訪報導、數據新聞分析、媒體生態與新聞專業倫理</p>
+                        <span class="badge bg-light text-secondary border">世新大學傳播研究所博士</span>
+                    </div>
+                </div>
+
+                <!-- 師資 3 -->
+                <div class="col-sm-6 col-lg-3">
+                    <div class="faculty-card">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80" alt="谷玲玲教授" class="faculty-avatar">
+                        <div class="faculty-name">谷玲玲</div>
+                        <div class="faculty-title">副教授</div>
+                        <p class="faculty-research">數位多媒體敘事、科學傳播、新科技與社會互動、健康傳播</p>
+                        <span class="badge bg-light text-secondary border">美國普渡大學傳播博士</span>
+                    </div>
+                </div>
+
+                <!-- 師資 4 -->
+                <div class="col-sm-6 col-lg-3">
+                    <div class="faculty-card">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" alt="實務講座業師" class="faculty-avatar">
+                        <div class="faculty-name">業界特聘導師群</div>
+                        <div class="faculty-title">客座與兼任實務專業師資</div>
+                        <p class="faculty-research">由得獎調查記者、公共電視製作人、財經總主筆擔任實作教練</p>
+                        <span class="badge bg-light text-secondary border">資深總編輯・卓越新聞獎評審</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. 辦學核心特色 (Key Educational Features) -->
+    <section class="features-banner" id="features">
+        <div class="container position-relative">
+            <div class="text-center mb-5">
+                <span class="text-warning text-uppercase fw-bold letter-spacing-2" style="font-size: 0.82rem; letter-spacing: 2px;">WHY NTU JOURNALISM</span>
+                <h2 class="text-white mt-1 fw-bold font-serif">四大辦學核心特色</h2>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-4 rounded-3 h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="feature-icon-box">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3 class="h5 text-white fw-bold">公共精神與新聞倫理</h3>
+                        <p class="text-light opacity-75 small mb-0">
+                            堅持新聞作為民主社會第四權的獨立精神，深化調查報導知能，培養捍衛公共利益與事實真相的堅定信念。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-4 rounded-3 h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="feature-icon-box">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <h3 class="h5 text-white fw-bold">AI 與數據新聞前沿</h3>
+                        <p class="text-light opacity-75 small mb-0">
+                            跨足開放資料分析、Python 資訊視覺化與生成式 AI 工具應用，將硬核數據轉譯為具高度影響力的故事。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-4 rounded-3 h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="feature-icon-box">
+                            <i class="bi bi-camera-video"></i>
+                        </div>
+                        <h3 class="h5 text-white fw-bold">全媒體實作教學中心</h3>
+                        <p class="text-light opacity-75 small mb-0">
+                            擁有百萬級專業電視攝影棚、4K 影音後製室與廣播錄音間，全真實模擬現代新聞編輯室高抗壓產製流程。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-4 rounded-3 h-100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="feature-icon-box">
+                            <i class="bi bi-globe-americas"></i>
+                        </div>
+                        <h3 class="h5 text-white fw-bold">國際交換與廣大校友</h3>
+                        <p class="text-light opacity-75 small mb-0">
+                            與美、歐、港多所知名大學締結交換計畫；校友遍佈國內外頂尖傳媒、科技平台與公部門，網絡強勁紮實。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. 招生簡介專區 (Admissions Section) -->
+    <section class="py-5" id="admissions-section">
+        <div class="container py-4">
+            <div class="card border-0 rounded-4 overflow-hidden shadow" style="background: linear-gradient(135deg, #fff 0%, #fff7f8 100%); border: 1px solid #fecdd3 !important;">
+                <div class="card-body p-4 p-lg-5">
+                    <div class="row align-items-center g-4">
+                        <div class="col-lg-8">
+                            <span class="badge bg-danger px-3 py-2 mb-3">115 學年度研究所招生</span>
+                            <h2 class="h2 fw-bold font-serif text-dark mb-3">準備好成為引領時代的媒體專業人才了嗎？</h2>
+                            <p class="text-secondary mb-4" style="line-height: 1.8;">
+                                臺大新聞所歡迎具備各領域專業背景（人文、社科、理工、商管、醫學）的同學報考。我們相信跨領域思維能為新聞報導注入最深刻的洞察力量。
+                            </p>
+                            <div class="row g-3 mb-4">
+                                <div class="col-sm-6">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-check-circle-fill text-danger fs-5"></i>
+                                        <span class="fw-semibold">推薦甄試：每年 10 月初報名</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-check-circle-fill text-danger fs-5"></i>
+                                        <span class="fw-semibold">一般筆試：每年 11 月底至 12 月初</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-check-circle-fill text-danger fs-5"></i>
+                                        <span class="fw-semibold">外籍生與僑生：配合臺大國際處時程</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-check-circle-fill text-danger fs-5"></i>
+                                        <span class="fw-semibold">免相關科系限制・歡迎跨領域報考</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-3">
+                                <a href="https://www.aca.ntu.edu.tw/w/aca/AdmissionIndex" target="_blank" rel="noopener" class="btn btn-ntu">
+                                    <i class="bi bi-download me-1"></i>下載最新招生簡章 (臺大教務處)
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-outline-secondary" onclick="alert('歡迎來信至新聞所信箱 journalism@ntu.edu.tw 索取考古題與諮詢！')">
+                                    <i class="bi bi-question-circle me-1"></i>諮詢招生常見問答
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <div class="bg-white p-4 rounded-3 shadow-sm border border-danger-subtle">
+                                <div class="text-danger mb-2"><i class="bi bi-calendar-event fs-1"></i></div>
+                                <h3 class="h5 fw-bold mb-2">招生專屬諮詢窗口</h3>
+                                <p class="small text-muted mb-3">若對書面審查資料準備或報考資格有任何疑問，歡迎聯絡新聞所辦公室。</p>
+                                <div class="font-monospace text-dark fw-bold mb-1">(02) 3366-3390</div>
+                                <div class="small text-secondary mb-3">周一至周五 09:00 - 17:00</div>
+                                <a href="mailto:journalism@ntu.edu.tw" class="btn btn-sm btn-ntu w-100">
+                                    <i class="bi bi-envelope me-1"></i>來信詢問
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. 頁尾 (Footer) -->
+    <footer class="footer-main" id="contact">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <!-- 學院與所徽 -->
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="bg-danger text-white rounded p-1 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: var(--ntu-primary) !important;">
+                            <i class="bi bi-newspaper"></i>
+                        </div>
+                        <span class="fs-5 fw-bold text-white font-serif">國立臺灣大學新聞研究所</span>
+                    </div>
+                    <p class="text-light opacity-75 small mb-3">
+                        培育具備敏銳批判思考、深度採訪調查與卓越跨平台實務能力的當代新聞傳播人才。
+                    </p>
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="https://facebook.com" class="social-link" title="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://youtube.com" class="social-link" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="https://instagram.com" class="social-link" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://spotify.com" class="social-link" title="Podcast"><i class="bi bi-spotify"></i></a>
+                    </div>
+                </div>
+
+                <!-- 快速連結 -->
+                <div class="col-6 col-lg-2">
+                    <div class="footer-title">網站導覽</div>
+                    <ul class="footer-links">
+                        <li><a href="#">首頁</a></li>
+                        <li><a href="#about-us">所所沿革</a></li>
+                        <li><a href="#news-section">最新消息</a></li>
+                        <li><a href="#faculty-section">專兼任師資</a></li>
+                        <li><a href="#admissions-section">招生資訊</a></li>
+                    </ul>
+                </div>
+
+                <!-- 常用系統 -->
+                <div class="col-6 col-lg-2">
+                    <div class="footer-title">校園資源</div>
+                    <ul class="footer-links">
+                        <li><a href="https://www.ntu.edu.tw" target="_blank" rel="noopener">臺大入口網站</a></li>
+                        <li><a href="https://coss.ntu.edu.tw" target="_blank" rel="noopener">社會科學院</a></li>
+                        <li><a href="https://nol.ntu.edu.tw" target="_blank" rel="noopener">臺大課程網</a></li>
+                        <li><a href="https://www.lib.ntu.edu.tw" target="_blank" rel="noopener">總圖書館</a></li>
+                        <li><a href="https://knownews.tw" target="_blank" rel="noopener">新聞E論壇</a></li>
+                    </ul>
+                </div>
+
+                <!-- 聯絡資訊 -->
+                <div class="col-lg-4">
+                    <div class="footer-title">聯絡我們</div>
+                    <ul class="footer-links" style="font-size: 0.88rem;">
+                        <li class="d-flex gap-2">
+                            <i class="bi bi-geo-alt-fill text-danger flex-shrink-0 mt-1"></i>
+                            <span>10617 臺北市大安區羅斯福路四段1號 新聞研究所館</span>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <i class="bi bi-telephone-fill text-danger flex-shrink-0 mt-1"></i>
+                            <span>電話：(02) 3366-3390</span>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <i class="bi bi-printer-fill text-danger flex-shrink-0 mt-1"></i>
+                            <span>傳真：(02) 2366-0797</span>
+                        </li>
+                        <li class="d-flex gap-2">
+                            <i class="bi bi-envelope-fill text-danger flex-shrink-0 mt-1"></i>
+                            <span>信箱：journalism@ntu.edu.tw</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="border-secondary opacity-25 my-4">
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small text-secondary">
+                <div>
+                    &copy; 2026 國立臺灣大學新聞研究所 Graduate Institute of Journalism, NTU. 版權所有.
+                </div>
+                <div>
+                    Designed for Web 115 Practice with Bootstrap Framework.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 浮動回到頂部按鈕 -->
+    <button id="backToTopBtn" title="回到頂端">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- 彈窗：站內搜尋 Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title font-serif fw-bold" id="searchModalLabel">搜尋臺大新聞所</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" class="form-control border-start-0" placeholder="輸入關鍵字（如：碩士招生、口試時間、實作學程）" id="searchInput">
+                        <button class="btn btn-ntu" type="button" onclick="performSearch()">搜尋</button>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <span class="small text-muted">熱門搜尋：</span>
+                        <a href="javascript:void(0)" class="badge bg-light text-dark text-decoration-none border" onclick="fillSearch('115碩士甄試')">115碩士甄試</a>
+                        <a href="javascript:void(0)" class="badge bg-light text-dark text-decoration-none border" onclick="fillSearch('新聞E論壇')">新聞E論壇</a>
+                        <a href="javascript:void(0)" class="badge bg-light text-dark text-decoration-none border" onclick="fillSearch('修業規定')">修業規定</a>
+                        <a href="javascript:void(0)" class="badge bg-light text-dark text-decoration-none border" onclick="fillSearch('週三論壇')">週三論壇</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 彈窗：公告詳情 Modal -->
+    <div class="modal fade" id="announcementModal" tabindex="-1" aria-labelledby="announcementModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title font-serif fw-bold" id="announcementModalLabel">公告詳細資訊</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge bg-danger" id="modalBadge">最新公告</span>
+                        <span class="text-muted small" id="modalDate"><i class="bi bi-calendar3 me-1"></i>2026-10-15</span>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3 font-serif" id="modalTitle">115 學年度臺大新聞研究所碩士班甄試口試時間表及注意事項公告</h3>
+                    <div class="text-secondary mb-4" id="modalContent" style="line-height: 1.8;">
+                        <p>一、口試日期：預計於 11 月上旬舉行，依准考證號序梯次進場。</p>
+                        <p>二、口試地點：國立臺灣大學新聞研究所大樓 2 樓第一會議室。</p>
+                        <p>三、報到注意事項：請考生於口試時間前 20 分鐘攜帶國民身分證正本及准考證至所辦公室完成報到作業。逾時未報到者視同放棄口試資格。</p>
+                        <p>四、如有任何疑問，請於上班時間致電新聞所辦公室 (02) 3366-3390。</p>
+                    </div>
+                    <div class="p-3 bg-light rounded-3 d-flex align-items-center justify-content-between">
+                        <span class="small text-muted"><i class="bi bi-paperclip me-1"></i>附件檔案：115_oral_exam_schedule.pdf (320 KB)</span>
+                        <a href="javascript:void(0)" class="btn btn-sm btn-outline-danger" onclick="alert('附件下載範例：檔案已準備完成。')">下載附件</a>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.3.3 Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!-- 頁面互動腳本 -->
+    <script>
+        // 1. 最新消息分類篩選
+        function filterNews(category, btnElement) {
+            // 切換按鈕 active 樣式
+            const buttons = document.querySelectorAll('#newsFilters .news-pill-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // 篩選新聞項目
+            const items = document.querySelectorAll('#newsList .news-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // 2. 搜尋填充功能
+        function fillSearch(keyword) {
+            document.getElementById('searchInput').value = keyword;
+            performSearch();
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                alert('您搜尋的關鍵字是：「' + query + '」，已為您在新聞所網站進行檢索！');
+            } else {
+                alert('請先輸入搜尋關鍵字。');
+            }
+        }
+
+        // 3. 回到頂部按鈕功能
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 4. 動態點擊新聞項目載入 Modal 內容
+        const newsItems = document.querySelectorAll('.news-item');
+        newsItems.forEach(item => {
+            item.addEventListener('click', function () {
+                const title = this.querySelector('.news-title')?.textContent || '公告事項';
+                const date = this.querySelector('.news-date')?.textContent || '2026-10-15';
+                const badge = this.querySelector('.news-badge')?.textContent || '公告';
+
+                document.getElementById('modalTitle').textContent = title;
+                document.getElementById('modalDate').innerHTML = '<i class="bi bi-calendar3 me-1"></i>' + date;
+                document.getElementById('modalBadge').textContent = badge;
+            });
+        });
+    </script>
+</body>
+
+</html>

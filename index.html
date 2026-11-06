@@ -1,0 +1,1290 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="WEB115 課程網頁：從純手刻 HTML/CSS、Bootstrap 框架、背景視差與 Sticky 定位，按難易度循序漸進的課程大綱與學習路徑。">
+  <title>WEB115 課程大綱 — 難度階梯與學習清單</title>
+  <style>
+    :root {
+      --paper: #f5f4ef;
+      --card-bg: #fcfcf9;
+      --ink: #242b29;
+      --muted: #626963;
+      --line: #d6d9d0;
+      --line-subtle: #e5e8e0;
+      --accent: #bb462b;
+      --accent-soft: #fbf0ec;
+      --accent-hover: #9c351e;
+      --tag-bg: #e9ece3;
+      --tag-text: #465549;
+      --code-bg: #ecefe8;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* 頂部導覽與頁首 */
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 0 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .course-badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: var(--card-bg);
+    }
+
+    /* 英雄區塊 */
+    .hero {
+      padding: 48px 0 32px;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .hero-desc {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+
+    /* 控制列與進度儀表 */
+    .dashboard-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin-bottom: 32px;
+    }
+
+    .progress-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .progress-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .progress-label strong {
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    .progress-track {
+      width: 140px;
+      height: 8px;
+      background: var(--line);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .actions-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-input {
+      font-family: inherit;
+      font-size: 13px;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+      width: 180px;
+      transition: border-color 0.15s;
+    }
+
+    .filter-input:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-toggle {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 6px 12px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+
+    .btn-toggle:hover {
+      color: var(--ink);
+      border-color: var(--muted);
+    }
+
+    /* 難易度階梯說明 (Legend) */
+    .difficulty-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    .stars {
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+
+    /* 主列表結構 (Level List) */
+    .curriculum-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* 單一主項目 (Main Item / Stage) */
+    .level-card {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .level-card:hover {
+      border-color: #b8bfb0;
+    }
+
+    /* 摺疊標題列 */
+    .level-header {
+      padding: 20px 24px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--card-bg);
+      transition: background-color 0.15s;
+    }
+
+    .level-header:hover {
+      background: #f9f9f5;
+    }
+
+    .level-title-area {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .level-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .level-num {
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .level-tier {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .level-name {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--ink);
+    }
+
+    .level-summary {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .level-aside {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .level-difficulty {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .collapse-icon {
+      font-size: 14px;
+      color: var(--muted);
+      transition: transform 0.25s ease;
+    }
+
+    .level-card.collapsed .collapse-icon {
+      transform: rotate(-90deg);
+    }
+
+    .level-card.collapsed .sublist-container {
+      display: none;
+    }
+
+    /* 子清單容器 (Sublist) */
+    .sublist-container {
+      border-top: 1px solid var(--line-subtle);
+      background: #fafaf6;
+      padding: 6px 24px 18px;
+    }
+
+    .sublist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sub-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line-subtle);
+      display: grid;
+      grid-template-columns: 24px 1fr auto;
+      gap: 16px;
+      align-items: flex-start;
+      transition: background-color 0.15s;
+    }
+
+    .sub-item:last-child {
+      border-bottom: none;
+    }
+
+    /* 勾選框 */
+    .item-checkbox {
+      margin-top: 4px;
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    .sub-item-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sub-item-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .sub-item-index {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .sub-item-title {
+      font-size: 15px;
+      font-weight: 650;
+      color: var(--ink);
+    }
+
+    .sub-item.done .sub-item-title {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .sub-item-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* 標籤群組 */
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .code-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--code-bg);
+      color: #2e3e34;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid #d8ddd5;
+    }
+
+    .ref-file {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: #fbf1ee;
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid #ebd0c8;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+
+    a.ref-file:hover {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .key-points {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #555e58;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .key-points li {
+      list-style-type: square;
+      margin-left: 18px;
+    }
+
+    /* 頁尾 */
+    .footer {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 680px) {
+      .shell {
+        padding: 0 16px;
+      }
+      .level-header {
+        padding: 16px;
+      }
+      .sublist-container {
+        padding: 4px 16px 14px;
+      }
+      .dashboard-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .actions-group {
+        justify-content: space-between;
+      }
+      .filter-input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="shell">
+  <!-- 頁首導覽 -->
+  <header class="masthead">
+    <div class="brand">
+      WEB115 <span>/</span> Curriculum
+    </div>
+    <span class="course-badge">網頁設計與數位敘事</span>
+  </header>
+
+  <!-- 英雄說明區 -->
+  <section class="hero">
+    <div class="eyebrow">Progressive Learning Path 難度進階路徑</div>
+    <h1>WEB115 課程進度清單</h1>
+    <p class="hero-desc">
+      從純手刻 HTML/CSS 骨架，過渡至 Bootstrap 響應式佈局，掌握背景視差固定與 Sticky 定位機制，再逐步深入捲動量化與數位敘事。以下依照難易度由淺入深排列。
+    </p>
+
+    <!-- 難易度對照標籤 -->
+    <div class="difficulty-legend">
+      <div class="legend-item"><span class="stars">★☆☆☆☆</span> 入門手刻</div>
+      <div class="legend-item"><span class="stars">★★☆☆☆</span> 框架與背景</div>
+      <div class="legend-item"><span class="stars">★★★☆☆</span> 吸頂與量化機制</div>
+      <div class="legend-item"><span class="stars">★★★★☆</span> 頁面控制與混合</div>
+      <div class="legend-item"><span class="stars">★★★★★</span> 數位敘事專題</div>
+    </div>
+
+    <!-- 學習進度儀表板與工具按鈕 -->
+    <div class="dashboard-bar">
+      <div class="progress-group">
+        <span class="progress-label">學習進度：<strong id="completedCount">0</strong> / <span id="totalCount">26</span></span>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div class="actions-group">
+        <input type="text" id="filterInput" class="filter-input" placeholder="搜尋主題或語法...">
+        <button type="button" class="btn-toggle" id="toggleAllBtn">全部收合</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 課程列表本體 (List with Sublist) -->
+  <main>
+    <ul class="curriculum-list" id="curriculumList">
+
+      <!-- LEVEL 01 -->
+      <li class="level-card" data-level="1">
+        <div class="level-header" role="button" tabindex="0">
+          <div class="level-title-area">
+            <div class="level-meta">
+              <span class="level-num">LEVEL 01</span>
+              <span class="level-tier">基礎手刻</span>
+            </div>
+            <div class="level-name">HTML + CSS 純手刻基礎 (Hand-Crafted Basics)</div>
+            <p class="level-summary">不依賴任何外部框架，從零親手撰寫語意標籤、盒模型與多區塊滾動排版，奠定網頁底層基礎。</p>
+          </div>
+          <div class="level-aside">
+            <span class="level-difficulty"><span class="stars">★☆☆☆☆</span> 入門</span>
+            <span class="collapse-icon">▼</span>
+          </div>
+        </div>
+        <div class="sublist-container">
+          <ul class="sublist">
+            <li class="sub-item" data-id="topic-1-1">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">01.1</span>
+                  <span class="sub-item-title">HTML 語意化結構與頁面骨架</span>
+                </div>
+                <p class="sub-item-desc">建立基本文檔標準聲明、視窗縮放設定，以及掌握各區段標籤的結構職責。</p>
+                <div class="tag-group">
+                  <span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+                  <span class="code-tag">&lt;header&gt;</span>
+                  <span class="code-tag">&lt;nav&gt;</span>
+                  <span class="code-tag">&lt;section&gt;</span>
+                  <span class="code-tag">&lt;main&gt;</span>
+                  <a class="ref-file" href="basic.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：basic.html">basic.html ↗</a>
+                </div>
+                <ul class="key-points">
+                  <li><code>&lt;meta name="viewport"&gt;</code> 的標準縮放配置與行動端閱讀相容性</li>
+                  <li>使用 <code>&lt;section&gt;</code> 與 <code>id="scene01"</code> 切分敘事場景</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-1-2">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">01.2</span>
+                  <span class="sub-item-title">CSS 盒模型與樣式基礎</span>
+                </div>
+                <p class="sub-item-desc">深入理解外距 (margin)、邊框 (border)、內距 (padding) 與內容寬度的盒模型計算，並使用 Flexbox 進行空間對齊。</p>
+                <div class="tag-group">
+                  <span class="code-tag">box-sizing: border-box</span>
+                  <span class="code-tag">margin / padding</span>
+                  <span class="code-tag">display: flex</span>
+                  <a class="ref-file" href="style.css" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：style.css">style.css ↗</a>
+                </div>
+                <ul class="key-points">
+                  <li>全域樣式重設與 <code>box-sizing: border-box</code> 避免寬度超出</li>
+                  <li>透過手刻 CSS 實現置中、雙欄與三欄佈局</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-1-3">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">01.3</span>
+                  <span class="sub-item-title">多場景手刻捲動與錨點導覽</span>
+                </div>
+                <p class="sub-item-desc">手刻包含 Banner、側欄 Nav、主要內容區與 Supporting 區塊的長頁面，利用錨點實現頁內平滑定位。</p>
+                <div class="tag-group">
+                  <span class="code-tag">&lt;a href="#scene01"&gt;</span>
+                  <span class="code-tag">scroll-behavior: smooth</span>
+                  <a class="ref-file" href="basic.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：basic.html">basic.html ↗</a>
+                </div>
+                <ul class="key-points">
+                  <li>錨點點擊後的頁內跳轉與邊界留白處理</li>
+                  <li>手刻結構如何為後續引入框架做準備</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- LEVEL 02 -->
+      <li class="level-card" data-level="2">
+        <div class="level-header" role="button" tabindex="0">
+          <div class="level-title-area">
+            <div class="level-meta">
+              <span class="level-num">LEVEL 02</span>
+              <span class="level-tier">響應式框架</span>
+            </div>
+            <div class="level-name">Bootstrap 框架與響應式格線 (Bootstrap Foundations)</div>
+            <p class="level-summary">從純手刻過渡至主流 UI 框架，利用 Container-Row-Col 格線系統與 Utility 工具類別快速建構響應式頁面。</p>
+          </div>
+          <div class="level-aside">
+            <span class="level-difficulty"><span class="stars">★★☆☆☆</span> 基礎</span>
+            <span class="collapse-icon">▼</span>
+          </div>
+        </div>
+        <div class="sublist-container">
+          <ul class="sublist">
+            <li class="sub-item" data-id="topic-2-1">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">02.1</span>
+                  <span class="sub-item-title">引入 Bootstrap 核心 (CDN &amp; Reboot)</span>
+                </div>
+                <p class="sub-item-desc">透過 CDN 引入現代 Bootstrap 樣式表與 JavaScript Bundle，理解其預設重設與 Typography 設定。</p>
+                <div class="tag-group">
+                  <span class="code-tag">&lt;link bootstrap.min.css&gt;</span>
+                  <span class="code-tag">bootstrap.bundle.min.js</span>
+                  <a class="ref-file" href="bt.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：bt.html">bt.html ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-2-2">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">02.2</span>
+                  <span class="sub-item-title">12 格線系統與響應式斷點 (Grid &amp; Breakpoints)</span>
+                </div>
+                <p class="sub-item-desc">運用 <code>.container</code>、<code>.row</code> 與斷點欄位配置（sm, md, lg），依視窗大小自動調整並排或堆疊欄位。</p>
+                <div class="tag-group">
+                  <span class="code-tag">.container / .container-fluid</span>
+                  <span class="code-tag">.row</span>
+                  <span class="code-tag">.col-sm-6 .col-md-4</span>
+                  <a class="ref-file" href="bt.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：bt.html">bt.html ↗</a>
+                </div>
+                <ul class="key-points">
+                  <li>雙欄自適應：例如左欄 4 格、右欄 8 格的報導圖文排版</li>
+                  <li>不同螢幕尺寸的自動斷行與間距維持</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-2-3">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">02.3</span>
+                  <span class="sub-item-title">Utility 類別與快速組裝 Banner</span>
+                </div>
+                <p class="sub-item-desc">利用間距類別（p-5, mt-5）、背景色彩（bg-primary, bg-light）及對齊工具迅速組裝報導 Hero 首頁橫幅。</p>
+                <div class="tag-group">
+                  <span class="code-tag">.p-5 .mt-5</span>
+                  <span class="code-tag">.bg-primary .text-white</span>
+                  <span class="code-tag">.text-center</span>
+                  <a class="ref-file" href="bt.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：bt.html">bt.html ↗</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- LEVEL 03 -->
+      <li class="level-card" data-level="3">
+        <div class="level-header" role="button" tabindex="0">
+          <div class="level-title-area">
+            <div class="level-meta">
+              <span class="level-num">LEVEL 03</span>
+              <span class="level-tier">視差基礎</span>
+            </div>
+            <div class="level-name">Bootstrap 背景圖片與 background-attachment: fixed</div>
+            <p class="level-summary">結合全視窗高度（vh-100）與固定背景圖層，創造出文字內容在靜態景深上滑過的初階視差捲動效果。</p>
+          </div>
+          <div class="level-aside">
+            <span class="level-difficulty"><span class="stars">★★☆☆☆</span> 基礎</span>
+            <span class="collapse-icon">▼</span>
+          </div>
+        </div>
+        <div class="sublist-container">
+          <ul class="sublist">
+            <li class="sub-item" data-id="topic-3-1">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">03.1</span>
+                  <span class="sub-item-title">滿版視窗高度與背景填滿 (vh-100 &amp; background-size)</span>
+                </div>
+                <p class="sub-item-desc">使用視窗單位 <code>100vh</code> 建立全螢幕區塊，配合 <code>cover</code> 與 <code>center</code> 讓高畫質影像適應各種螢幕長寬比。</p>
+                <div class="tag-group">
+                  <span class="code-tag">height: 100vh / .vh-100</span>
+                  <span class="code-tag">background-size: cover</span>
+                  <span class="code-tag">background-position: center</span>
+                  <a class="ref-file" href="bt2.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：bt2.html">bt2.html ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-3-2">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">03.2</span>
+                  <span class="sub-item-title">核心語法：background-attachment: fixed</span>
+                </div>
+                <p class="sub-item-desc">改變背景圖片的定位參照對象，使其固定於瀏覽器視窗（Viewport），頁面捲動時僅文字內容位移，背景維持靜止。</p>
+                <div class="tag-group">
+                  <span class="code-tag">background-attachment: fixed</span>
+                  <span class="code-tag">background-repeat: no-repeat</span>
+                  <a class="ref-file" href="bt2.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：bt2.html">bt2.html ↗</a>
+                  <a class="ref-file" href="scrolling-lab.html#fixed" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：scrolling-lab.html #fixed">scrolling-lab.html #fixed ↗</a>
+                </div>
+                <ul class="key-points">
+                  <li>比較 <code>scroll</code>（隨文檔滾動）與 <code>fixed</code>（釘在視窗）的空間運動感</li>
+                  <li>在行動裝置或特定瀏覽器上的繪圖效能與相容性考量</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-3-3">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">03.3</span>
+                  <span class="sub-item-title">多場景固定背景交替敘事 (Multi-Scene Parallax)</span>
+                </div>
+                <p class="sub-item-desc">串聯多個連續的 100vh 固定背景區塊（如主角人物寫真、故事場景切換），形成宛如窗景切換的故事流。</p>
+                <div class="tag-group">
+                  <span class="code-tag">#first / #second</span>
+                  <span class="code-tag">.container-fluid.vh-100</span>
+                  <a class="ref-file" href="bt2.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：bt2.html">bt2.html ↗</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- LEVEL 04 -->
+      <li class="level-card" data-level="4">
+        <div class="level-header" role="button" tabindex="0">
+          <div class="level-title-area">
+            <div class="level-meta">
+              <span class="level-num">LEVEL 04</span>
+              <span class="level-tier">定位與吸頂</span>
+            </div>
+            <div class="level-name">捲動固定定位：Sticky-top 與吸頂機制</div>
+            <p class="level-summary">解析元素在捲動至視窗邊緣時吸附頂端的物理原則，包含父容器約束邊界以及防止版面塌陷的佔位機制。</p>
+          </div>
+          <div class="level-aside">
+            <span class="level-difficulty"><span class="stars">★★★☆☆</span> 中階</span>
+            <span class="collapse-icon">▼</span>
+          </div>
+        </div>
+        <div class="sublist-container">
+          <ul class="sublist">
+            <li class="sub-item" data-id="topic-4-1">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">04.1</span>
+                  <span class="sub-item-title">position: sticky 與 Bootstrap .sticky-top 原理</span>
+                </div>
+                <p class="sub-item-desc">理解 sticky 與純 fixed 的本質區別：sticky 在達到閾值前保持自然流動，接觸邊緣後暫時固定，不脫離常規文檔流。</p>
+                <div class="tag-group">
+                  <span class="code-tag">position: sticky</span>
+                  <span class="code-tag">top: 0</span>
+                  <span class="code-tag">.sticky-top</span>
+                  <a class="ref-file" href="sticky-top-prompt.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：sticky-top-prompt.html">sticky-top-prompt.html ↗</a>
+                  <a class="ref-file" href="scrolling-lab.html#sticky" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：scrolling-lab.html #sticky">scrolling-lab.html #sticky ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-4-2">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">04.2</span>
+                  <span class="sub-item-title">父容器約束邊界 (Parent Boundaries)</span>
+                </div>
+                <p class="sub-item-desc">深入剖析 sticky 元素的活動極限：其吸頂行為僅在其父容器（Parent Container）可見範圍內生效，父層滾出時元素被推走。</p>
+                <div class="tag-group">
+                  <span class="code-tag">parent container</span>
+                  <span class="code-tag">overflow: hidden (avoid)</span>
+                  <a class="ref-file" href="scrolling-lab.html#sticky" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：scrolling-lab.html #sticky">scrolling-lab.html #sticky ↗</a>
+                </div>
+                <ul class="key-points">
+                  <li>常見錯誤除錯：父層設置 <code>overflow: hidden</code> 會導致 sticky 立即失效</li>
+                  <li>如何利用長度高達 300vh 的父容器打造長時間停留的固定展示窗</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-4-3">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">04.3</span>
+                  <span class="sub-item-title">動態吸頂與 Placeholder 佔位防抖動</span>
+                </div>
+                <p class="sub-item-desc">當透過 JavaScript 或滾動偵測將元素切換為 fixed/sticky 時，使用隱形佔位元素（Placeholder）避免下方內容突兀跳動。</p>
+                <div class="tag-group">
+                  <span class="code-tag">.fixed-top-placeholder</span>
+                  <span class="code-tag">$(window).scrollTop()</span>
+                  <span class="code-tag">.is-fixed { position: fixed }</span>
+                  <a class="ref-file" href="sticky-top-prompt.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：sticky-top-prompt.html">sticky-top-prompt.html ↗</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- LEVEL 05 -->
+      <li class="level-card" data-level="5">
+        <div class="level-header" role="button" tabindex="0">
+          <div class="level-title-area">
+            <div class="level-meta">
+              <span class="level-num">LEVEL 05</span>
+              <span class="level-tier">量化與機制</span>
+            </div>
+            <div class="level-name">捲動物理與進度度量 (Scroll Mechanics &amp; Lab)</div>
+            <p class="level-summary">解構可捲動距離的數學關係，將縱向滾動比例轉化為橫向進度條、物件平移動畫與三層橫向捲動。</p>
+          </div>
+          <div class="level-aside">
+            <span class="level-difficulty"><span class="stars">★★★☆☆</span> 中階</span>
+            <span class="collapse-icon">▼</span>
+          </div>
+        </div>
+        <div class="sublist-container">
+          <ul class="sublist">
+            <li class="sub-item" data-id="topic-5-1">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">05.1</span>
+                  <span class="sub-item-title">可捲動距離與數學模型 (Scroll Dimensions)</span>
+                </div>
+                <p class="sub-item-desc">釐清文件高度 (Document Height)、視窗高度 (Viewport Height) 以及最大有效可捲動距離的計算公式。</p>
+                <div class="tag-group">
+                  <span class="code-tag">maxScroll = docHeight - winHeight</span>
+                  <span class="code-tag">scrollTop</span>
+                  <a class="ref-file" href="scrolling-lab.html#distance" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：scrolling-lab.html #distance">scrolling-lab.html #distance ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-5-2">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">05.2</span>
+                  <span class="sub-item-title">縱向捲動比率映射橫向進度條 (Status Bar)</span>
+                </div>
+                <p class="sub-item-desc">將 0 到 1 的捲動進度比率（scrollRatio）即時反映在橫向進度條的寬度百分比上，為長篇報導提供視覺指引。</p>
+                <div class="tag-group">
+                  <span class="code-tag">ratio = current / max</span>
+                  <span class="code-tag">width: ${ratio * 100}%</span>
+                  <a class="ref-file" href="scrolling-lab.html#status" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：scrolling-lab.html #status">scrolling-lab.html #status ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-5-3">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">05.3</span>
+                  <span class="sub-item-title">複合場景：Sticky-top + 局部進度條</span>
+                </div>
+                <p class="sub-item-desc">把吸頂場景與進度條結合，當捲動進入特定章節時顯示該幕專屬的閱讀進度，離開時順暢銜接下一幕。</p>
+                <div class="tag-group">
+                  <span class="code-tag">scene progress</span>
+                  <span class="code-tag">sticky container</span>
+                  <a class="ref-file" href="scrolling-lab.html#combined" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：scrolling-lab.html #combined">scrolling-lab.html #combined ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-5-4">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">05.4</span>
+                  <span class="sub-item-title">捲動比率轉物件位移 (Moving Objects)</span>
+                </div>
+                <p class="sub-item-desc">以捲動量驅動視覺元件（如車輛、人物、指標）在軌道上平移，計算物件自身寬度對最大可移動距離的影響。</p>
+                <div class="tag-group">
+                  <span class="code-tag">transform: translateX(...)</span>
+                  <span class="code-tag">will-change: transform</span>
+                  <a class="ref-file" href="scrolling-lab.html#moving" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：scrolling-lab.html #moving">scrolling-lab.html #moving ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-5-5">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">05.5</span>
+                  <span class="sub-item-title">三層結構解構橫向捲動 (Horizontal Scrolling)</span>
+                </div>
+                <p class="sub-item-desc">拆解經典橫向捲動三層：外層垂直滾動高度容器、中層 Sticky 吸頂視窗、內層橫向位移軌道。</p>
+                <div class="tag-group">
+                  <span class="code-tag">height: 400vh (Outer)</span>
+                  <span class="code-tag">position: sticky (Middle)</span>
+                  <span class="code-tag">width: 400% (Inner Track)</span>
+                  <a class="ref-file" href="scrolling-lab.html#horizontal" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：scrolling-lab.html #horizontal">scrolling-lab.html #horizontal ↗</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- LEVEL 06 -->
+      <li class="level-card" data-level="6">
+        <div class="level-header" role="button" tabindex="0">
+          <div class="level-title-area">
+            <div class="level-meta">
+              <span class="level-num">LEVEL 06</span>
+              <span class="level-tier">頁面控制</span>
+            </div>
+            <div class="level-name">Slide Effect 滑頁與長頁混合 (Slide &amp; Hybrid)</div>
+            <p class="level-summary">從最簡的滾輪接管滑頁出發，處理包含長文章的混合捲動問題，並對比 GSAP 與原生 Scroll Snap 實作。</p>
+          </div>
+          <div class="level-aside">
+            <span class="level-difficulty"><span class="stars">★★★★☆</span> 進階</span>
+            <span class="collapse-icon">▼</span>
+          </div>
+        </div>
+        <div class="sublist-container">
+          <ul class="sublist">
+            <li class="sub-item" data-id="topic-6-1">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">06.1</span>
+                  <span class="sub-item-title">最簡滾輪滿版滑頁 (Minimal Wheel Slideshow)</span>
+                </div>
+                <p class="sub-item-desc">監聽滾輪事件搭配 translateY 與 CSS transition，將連續滾動轉換為整頁式投影片切換。</p>
+                <div class="tag-group">
+                  <span class="code-tag">$(window).on('wheel')</span>
+                  <span class="code-tag">transform: translateY(-N * 100vh)</span>
+                  <a class="ref-file" href="slideshow.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：slideshow.html">slideshow.html ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-6-2">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">06.2</span>
+                  <span class="sub-item-title">滑頁架構中嵌入長頁 (One Long Page within Slides)</span>
+                </div>
+                <p class="sub-item-desc">突破「所有投影片皆為一幕」的限制，當某一頁內容過長時，保留內部自然捲動，到底後才觸發換頁。</p>
+                <div class="tag-group">
+                  <span class="code-tag">overflow-y: scroll</span>
+                  <span class="code-tag">boundary detection</span>
+                  <a class="ref-file" href="slideshow-long-page.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：slideshow-long-page.html">slideshow-long-page.html ↗</a>
+                  <a class="ref-file" href="slide-effect-long-page.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：slide-effect-long-page.html">slide-effect-long-page.html ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-6-3">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">06.3</span>
+                  <span class="sub-item-title">原生 CSS Scroll Snap vs GSAP 動畫庫對比</span>
+                </div>
+                <p class="sub-item-desc">比較原生純 CSS 吸附機制（零 JS、高流暢度）與專業動畫函式庫（精確緩動、手勢攔截）的實務取捨與操作手感。</p>
+                <div class="tag-group">
+                  <span class="code-tag">scroll-snap-type: y mandatory</span>
+                  <span class="code-tag">scroll-snap-align: start</span>
+                  <span class="code-tag">gsap.to()</span>
+                  <a class="ref-file" href="slideshow-scroll-snap.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：slideshow-scroll-snap.html">slideshow-scroll-snap.html ↗</a>
+                  <a class="ref-file" href="slideshow-gsap.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：slideshow-gsap.html">slideshow-gsap.html ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-6-4">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">06.4</span>
+                  <span class="sub-item-title">現代重構版：滑動切換與長內容頁混合</span>
+                </div>
+                <p class="sub-item-desc">運用現代語法重構 slide effect，優化過渡動畫與觸控反應，解決回滾卡頓與邊界判定難題。</p>
+                <div class="tag-group">
+                  <span class="code-tag">modern event handling</span>
+                  <span class="code-tag">smooth transitions</span>
+                  <a class="ref-file" href="slide-effect.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：slide-effect.html">slide-effect.html ↗</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- LEVEL 07 -->
+      <li class="level-card" data-level="7">
+        <div class="level-header" role="button" tabindex="0">
+          <div class="level-title-area">
+            <div class="level-meta">
+              <span class="level-num">LEVEL 07</span>
+              <span class="level-tier">綜合敘事專案</span>
+            </div>
+            <div class="level-name">數位敘事綜合案例 (Scrollytelling Projects)</div>
+            <p class="level-summary">結合地圖、3D 建築模型、群像像素動畫與多層景深視差，將前述所有捲動機制融會貫通為完整數位報導作品。</p>
+          </div>
+          <div class="level-aside">
+            <span class="level-difficulty"><span class="stars">★★★★★</span> 專題</span>
+            <span class="collapse-icon">▼</span>
+          </div>
+        </div>
+        <div class="sublist-container">
+          <ul class="sublist">
+            <li class="sub-item" data-id="topic-7-1">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">07.1</span>
+                  <span class="sub-item-title">臺灣選舉版圖 Scrollytelling (固定地圖與文字互動)</span>
+                </div>
+                <p class="sub-item-desc">左側或背景固定互動式臺灣 22 縣市地圖，右側滾動敘事文本，隨滾動進度動態觸發縣市浮起、顏色切換與數據圖表。</p>
+                <div class="tag-group">
+                  <span class="code-tag">SVG Map Scrollytelling</span>
+                  <span class="code-tag">step-driven highlighting</span>
+                  <a class="ref-file" href="taiwan-election-scrolly.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：taiwan-election-scrolly.html">taiwan-election-scrolly.html ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-7-2">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">07.2</span>
+                  <span class="sub-item-title">3D 建築空間導覽 (Three.js 樓層模型與平滑視角切換)</span>
+                </div>
+                <p class="sub-item-desc">先獨立建立臺大新聞所 3D 結構模型，再結合捲動控制攝影機鏡頭軌跡，隨讀者閱讀進度平滑穿梭各樓層。</p>
+                <div class="tag-group">
+                  <span class="code-tag">Three.js WebGL</span>
+                  <span class="code-tag">camera position interpolation</span>
+                  <a class="ref-file" href="ntu-journalism-3d-standalone.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：ntu-journalism-3d-standalone.html">ntu-journalism-3d-standalone.html ↗</a>
+                  <a class="ref-file" href="ntu-journalism-scroll-story.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：ntu-journalism-scroll-story.html">ntu-journalism-scroll-story.html ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-7-3">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">07.3</span>
+                  <span class="sub-item-title">100 個資料點的動態重組敘事 (Data Point Grid)</span>
+                </div>
+                <p class="sub-item-desc">用 100 個點代表 100%，隨滾動平滑位移並重新分組聚合成不同群組，生動呈現學生背景、入學方式與職涯比例變化。</p>
+                <div class="tag-group">
+                  <span class="code-tag">CSS Grid / Particle reposition</span>
+                  <span class="code-tag">data storytelling</span>
+                  <a class="ref-file" href="ntu-journalism-student-story.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：ntu-journalism-student-story.html">ntu-journalism-student-story.html ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-7-4">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">07.4</span>
+                  <span class="sub-item-title">像素人物群像與社會分化 (Pixel Crowd Story)</span>
+                </div>
+                <p class="sub-item-desc">結合 100 位像素人物圖像與捲動序列動畫，隨捲動呈現人群從多元聚集、逐漸同質化到最終分為兩大陣營的情感張力。</p>
+                <div class="tag-group">
+                  <span class="code-tag">pixel art sprite animation</span>
+                  <span class="code-tag">narrative pacing</span>
+                  <a class="ref-file" href="pixel-crowd-story.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：pixel-crowd-story.html">pixel-crowd-story.html ↗</a>
+                </div>
+              </div>
+            </li>
+
+            <li class="sub-item" data-id="topic-7-5">
+              <input type="checkbox" class="item-checkbox" aria-label="標記完成">
+              <div class="sub-item-body">
+                <div class="sub-item-head">
+                  <span class="sub-item-index">07.5</span>
+                  <span class="sub-item-title">多層景深視差捲動 (Multi-Layer Parallax: Aladdin)</span>
+                </div>
+                <p class="sub-item-desc">將遠景天空、中景雲層建築、主角人物與前景樹石拆為多層，依距離賦予不同位移速率，呈現電影級的立體空間滾動體驗。</p>
+                <div class="tag-group">
+                  <span class="code-tag">multi-layer depth layering</span>
+                  <span class="code-tag">parallax scroll speed ratio</span>
+                  <a class="ref-file" href="parallax-scrolling-alladin/index.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：parallax-scrolling-alladin/index.html">parallax-scrolling-alladin/index.html ↗</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+    </ul>
+  </main>
+
+  <!-- 頁尾宣告 -->
+  <footer class="footer">
+    <span>WEB115 / Course Curriculum &amp; Syllabus</span>
+    <span>Read the code. Try a change. See what happens.</span>
+  </footer>
+</div>
+
+<script>
+  // 學習進度儲存與勾選狀態
+  const STORAGE_KEY = 'web115_curriculum_progress';
+  const checkboxes = document.querySelectorAll('.item-checkbox');
+  const totalCountEl = document.getElementById('totalCount');
+  const completedCountEl = document.getElementById('completedCount');
+  const progressFillEl = document.getElementById('progressFill');
+
+  let savedState = {};
+  try {
+    savedState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  } catch (e) {
+    savedState = {};
+  }
+
+  function updateProgress() {
+    let completed = 0;
+    checkboxes.forEach(cb => {
+      const item = cb.closest('.sub-item');
+      const id = item.getAttribute('data-id');
+      if (savedState[id]) {
+        cb.checked = true;
+        item.classList.add('done');
+        completed++;
+      } else {
+        cb.checked = false;
+        item.classList.remove('done');
+      }
+    });
+
+    const total = checkboxes.length;
+    totalCountEl.textContent = total;
+    completedCountEl.textContent = completed;
+    const pct = total > 0 ? (completed / total) * 100 : 0;
+    progressFillEl.style.width = pct + '%';
+  }
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const item = cb.closest('.sub-item');
+      const id = item.getAttribute('data-id');
+      savedState[id] = cb.checked;
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(savedState));
+      } catch (e) {}
+      updateProgress();
+    });
+  });
+
+  // 點擊折疊收合主項目
+  const levelCards = document.querySelectorAll('.level-card');
+  levelCards.forEach(card => {
+    const header = card.querySelector('.level-header');
+    header.addEventListener('click', () => {
+      card.classList.toggle('collapsed');
+      updateToggleAllBtnText();
+    });
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.classList.toggle('collapsed');
+        updateToggleAllBtnText();
+      }
+    });
+  });
+
+  // 全部展開 / 全部收合
+  const toggleAllBtn = document.getElementById('toggleAllBtn');
+  let isAllCollapsed = false;
+
+  function updateToggleAllBtnText() {
+    const anyExpanded = Array.from(levelCards).some(c => !c.classList.contains('collapsed'));
+    toggleAllBtn.textContent = anyExpanded ? '全部收合' : '全部展開';
+    isAllCollapsed = !anyExpanded;
+  }
+
+  toggleAllBtn.addEventListener('click', () => {
+    const targetCollapse = !isAllCollapsed;
+    levelCards.forEach(c => {
+      if (targetCollapse) {
+        c.classList.add('collapsed');
+      } else {
+        c.classList.remove('collapsed');
+      }
+    });
+    isAllCollapsed = targetCollapse;
+    toggleAllBtn.textContent = isAllCollapsed ? '全部展開' : '全部收合';
+  });
+
+  // 即時搜尋過濾功能
+  const filterInput = document.getElementById('filterInput');
+  filterInput.addEventListener('input', (e) => {
+    const query = e.target.value.trim().toLowerCase();
+    levelCards.forEach(card => {
+      const subItems = card.querySelectorAll('.sub-item');
+      let visibleSubCount = 0;
+
+      subItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const matches = text.includes(query);
+        item.style.display = matches ? '' : 'none';
+        if (matches) visibleSubCount++;
+      });
+
+      // 如果有子項目匹配，或者主標題包含搜尋詞，則顯示此卡片
+      const cardTitleText = card.querySelector('.level-title-area').textContent.toLowerCase();
+      const cardMatches = cardTitleText.includes(query) || visibleSubCount > 0;
+
+      card.style.display = cardMatches ? '' : 'none';
+
+      // 搜尋時若有匹配自動展開
+      if (query.length > 0 && cardMatches) {
+        card.classList.remove('collapsed');
+      }
+    });
+    updateToggleAllBtnText();
+  });
+
+  // 初始化進度條
+  updateProgress();
+</script>
+
+</body>
+</html>

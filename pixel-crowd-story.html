@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="100 位像素人物的捲動敘事：從個體的多彩，到群聚、趨同與兩群對望。">
+<title>當顏色只剩兩種 — 100 人的群像練習</title>
+<style>
+:root{--paper:#f5f2e9;--ink:#302f2d;--muted:#79766e;--line:#d8d3c7;--red:#cd534a;--blue:#4c79bd;--vh:100svh}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"PingFang TC","Noto Sans TC",sans-serif}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inherit}a{color:inherit}button:focus-visible,a:focus-visible{outline:3px solid var(--red);outline-offset:5px}header{position:fixed;z-index:5;left:4vw;right:4vw;top:0;height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:var(--paper)}.brand{font:11px ui-monospace,monospace;letter-spacing:2px;text-decoration:none}.brand b{display:inline-block;width:8px;height:8px;background:var(--red);box-shadow:10px 0 var(--blue);margin-right:22px}.head-right{font-size:11px;letter-spacing:1px;color:var(--muted)}.visual{position:fixed;left:3vw;top:104px;width:64vw;bottom:90px;pointer-events:none}.scene-top{position:absolute;top:0;left:2vw;right:2vw;display:flex;align-items:center;justify-content:space-between;font:11px ui-monospace,monospace;letter-spacing:1.5px;color:var(--muted)}.scene-top strong{color:var(--ink);font-size:24px;letter-spacing:-1px}.scene-top strong small{font:11px ui-monospace,monospace;letter-spacing:1px;margin-left:6px}.stage{position:absolute;inset:55px 0 0;width:100%;height:calc(100% - 55px)}canvas{display:block;image-rendering:pixelated}.scene-caption{position:absolute;bottom:-30px;width:100%;text-align:center;color:var(--muted);font-size:11px;letter-spacing:1px}.step{height:var(--vh);min-height:600px;display:flex;align-items:center;position:relative;pointer-events:none}.copy{margin-left:72%;width:24%;max-width:390px;padding:76px 12px 40px 0;pointer-events:auto}.eyebrow{font:11px ui-monospace,monospace;letter-spacing:2px;color:var(--muted);margin:0 0 26px}.eyebrow span{color:var(--red);margin-right:14px}h1,h2{font-size:clamp(30px,3.2vw,52px);font-weight:650;line-height:1.3;letter-spacing:-1.5px;margin:0 0 25px}h1{font-size:clamp(36px,4.1vw,66px);line-height:1.21}h1 em{font-style:normal;color:var(--red)}h1 .blue{color:var(--blue)}.copy>p:not(.eyebrow){font-size:15px;line-height:1.95;color:#6c685f;margin:0 0 18px}.copy strong{font-weight:600;color:var(--ink)}.rule{width:35px;border-top:2px solid var(--ink);margin:24px 0}.note{font-size:11px!important;color:var(--muted)!important;line-height:1.8!important}.swatches{display:flex;gap:5px;margin:22px 0}.swatches i{width:22px;height:7px;display:block;background:var(--c)}.down{display:inline-block;margin-top:22px;text-decoration:none;font-size:12px;letter-spacing:1px;border-bottom:1px solid var(--ink);padding-bottom:8px}.face-study{position:fixed;z-index:1;left:72%;width:23%;bottom:90px;pointer-events:none;opacity:0;transition:opacity .3s}.face-study.visible{opacity:1}.face-study canvas{width:100%;height:92px}.face-study span{display:block;text-align:center;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:8px}.step:nth-child(n+4) .copy{padding-bottom:160px}.footer{position:fixed;z-index:5;bottom:0;left:4vw;right:4vw;height:65px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--paper);gap:15px}.footer-note{font-size:10px;color:var(--muted);letter-spacing:.6px}.nav{display:flex;gap:8px;align-items:center}.nav a{display:flex;align-items:center;justify-content:center;text-decoration:none;width:30px;height:30px;font:11px ui-monospace,monospace;border:1px solid transparent;color:var(--muted)}.nav a[aria-current=step]{border-color:var(--ink);color:var(--ink);background:#e9e4d8}.tools{display:flex;gap:14px}button{border:0;background:none;font-size:11px;cursor:pointer;padding:7px 0;color:var(--muted)}button:hover{color:var(--ink)}.progress{position:fixed;z-index:10;left:0;top:0;width:0;height:3px;background:linear-gradient(90deg,var(--red),var(--blue));pointer-events:none}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}noscript{position:fixed;inset:100px 10%;background:var(--paper);z-index:20;padding:40px}
+@media(min-width:1500px){.copy{max-width:410px}.copy>p:not(.eyebrow){font-size:17px}}
+@media(max-width:760px){header{height:56px}.head-right{font-size:9px}.brand{font-size:9px;letter-spacing:1px}.visual{left:3vw;top:43svh;bottom:91px;width:94vw}.scene-top{top:-12px;font-size:9px}.scene-top strong{font-size:19px}.stage{inset:23px 0 0;height:calc(100% - 23px)}.scene-caption{font-size:9px;bottom:-17px}.step{min-height:620px;align-items:flex-start}.copy{margin:0;width:100%;max-width:none;padding:92px 8vw 0!important}h1{font-size:38px;line-height:1.2;margin-bottom:14px}h1 br:first-of-type{display:none}h2{font-size:30px;margin-bottom:14px}.eyebrow{margin-bottom:14px;font-size:9px}.copy>p:not(.eyebrow){font-size:13px;line-height:1.85;max-width:510px;margin-bottom:8px}.rule,.swatches,.down{display:none}.copy .note{font-size:9px!important}.footer{height:58px}.footer-note{display:none}.nav{gap:2px}.tools{gap:12px}.face-study{display:none}.nav a{width:27px;height:27px}.scene-top strong small{font-size:9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<header><a class="brand" href="#opening"><b aria-hidden="true"></b>THE COLORS BETWEEN US</a><span class="head-right">100 人的群像練習 / WEB115</span></header>
+<div class="visual" role="img" aria-label="100 位像素人物。隨捲動從多彩個體聚成五群，最後變為紅藍各 50 人，互相對望。">
+<div class="scene-top"><strong>100<small>PEOPLE</small></strong><span id="scene-label">同一片風景</span></div>
+<canvas class="stage" id="crowd" aria-hidden="true"></canvas>
+<div class="scene-caption" id="caption">每一個人，都不只有一種顏色。</div>
+</div>
+<main>
+<section class="step" id="opening" aria-labelledby="title-0"><div class="copy"><p class="eyebrow"><span>01 / 05</span> A CROWD, A STORY</p><h1 id="title-0">當顏色<br>只剩<span class="blue">兩</span><em>種</em></h1><div class="rule"></div><p>從一百個不同的人，<br>到彼此凝視的兩個群體。<br>距離，是怎麼慢慢出現的？</p><p class="note">一段關於群聚與分化的視覺假想。<br>配色與人數皆為示意，不代表真實民調或特定政黨。</p><a class="down" href="#many-colors">向下捲動，觀察變化 ↓</a></div></section>
+<section class="step" id="many-colors" aria-labelledby="title-1"><div class="copy"><p class="eyebrow"><span>02 / 05</span> MANY COLORS</p><h2 id="title-1">每個人，<br>都不只一種顏色。</h2><p>衣服、袖子、褲子，各有不同的色彩。生活經驗、興趣與想法，也可能同時存在於一個人身上。</p><p>此刻，<strong>差異散落在人群之中</strong>，還沒有清楚的邊界。</p><div class="swatches" aria-hidden="true"><i style="--c:#ce6254"></i><i style="--c:#c9a047"></i><i style="--c:#489f99"></i><i style="--c:#5b86bd"></i><i style="--c:#9771ac"></i></div></div></section>
+<section class="step" id="gathering" aria-labelledby="title-2"><div class="copy"><p class="eyebrow"><span>03 / 05</span> FINDING SIMILARITY</p><h2 id="title-2">相近的顏色，<br>開始靠在一起。</h2><p>假設共同的偏好、經驗或接觸的資訊，讓相似的人逐漸聚集。</p><p>原本交錯的人群，形成了<strong>五個小群體</strong>。但仔細看，每個人的身上仍然有別的顏色。</p><p class="note">同一批 100 人持續移動，沒有新增或消失。</p></div></section>
+<section class="step" id="alike" aria-labelledby="title-3"><div class="copy"><p class="eyebrow"><span>04 / 05</span> BECOMING ALIKE</p><h2 id="title-3">越來越像，<br>也越來越在意彼此。</h2><p>同一群人的衣著逐漸趨近，原本的多彩變得不那麼明顯。</p><p>有人交叉手臂，有人托著下巴。眉頭微蹙，<strong>眼神開始看左、看右</strong>，留意其他群體的動靜。</p></div></section>
+<section class="step" id="two-sides" aria-labelledby="title-4"><div class="copy"><p class="eyebrow"><span>05 / 05</span> TWO SIDES</p><h2 id="title-4">最後，<br>只看見兩種顏色。</h2><p>五群重新聚成兩邊。左邊染成紅色，視線朝右；右邊染成藍色，視線朝左。</p><p><strong>人，還是原來那一百個人。</strong><br>但此刻，更容易先看見對方屬於哪一邊。</p><p class="note">紅、藍僅用來區分兩個假想群體。</p></div></section>
+</main>
+<div class="face-study" aria-hidden="true"><canvas id="faces"></canvas><span>表情近看 / 同一批人物</span></div>
+<footer class="footer"><span class="footer-note">PIXEL CROWD · 概念示意</span><nav class="nav" aria-label="敘事段落"><a href="#opening" aria-label="第一幕：主題" aria-current="step">01</a><a href="#many-colors" aria-label="第二幕：多種顏色">02</a><a href="#gathering" aria-label="第三幕：聚成五群">03</a><a href="#alike" aria-label="第四幕：配色趨同與懷疑">04</a><a href="#two-sides" aria-label="第五幕：紅藍兩群對望">05</a></nav><div class="tools"><button id="motion" type="button" aria-pressed="false">暫停微動</button><button id="restart" type="button">重新觀看 ↗</button></div></footer>
+<p class="sr-only" id="status" aria-live="polite"></p>
+<noscript>此互動群像需要啟用 JavaScript，才能顯示 100 位人物與捲動變化。</noscript>
+<script>
+'use strict';
+// The seed keeps each person's hair, skin, pose and identity unchanged on every visit.
+const canvas = document.querySelector('#crowd'), ctx = canvas.getContext('2d');
+const faceCanvas = document.querySelector('#faces'), faceCtx = faceCanvas.getContext('2d');
+const steps = [...document.querySelectorAll('.step')];
+const links = [...document.querySelectorAll('.nav a')];
+const palette = ['#ce6254','#c9a047','#489f99','#5b86bd','#9771ac'];
+const skin = ['#e8b88c','#d5a179','#b98060','#f1caaa','#a36f52'];
+const hair = ['#353332','#55443c','#77614d','#b0a597','#353332','#704f3f'];
+const names = ['同一片風景','100 種色彩組合','5 個群體 × 20 人','群內趨同 / 視線游移','2 個群體 × 50 人'];
+const captions = ['每一個人，都不只有一種顏色。','不同的顏色，可以同時存在於一個人身上。','相似的人靠近了，個體的差異還在。','同一群的顏色逐漸相近，目光開始投向別處。','50 人 →                         ← 50 人'];
+const clamp = (v,a=0,b=1) => Math.max(a, Math.min(b,v));
+const mix = (a,b,t) => a+(b-a)*t;
+const ease = t => t*t*(3-2*t);
+function rgb(hex){return hex.match(/\w\w/g).map(n=>parseInt(n,16));}
+function color(a,b,t){return 'rgb('+a.map((v,j)=>Math.round(mix(v,b[j],t))).join(',')+')';}
+const colors = palette.map(rgb), red=rgb('#cd534a'), blue=rgb('#4c79bd');
+const people = Array.from({length:100},(_,i)=>{
+ const group=i%5, rank=Math.floor(i/5), side=group<2?0:group<4?1:rank%2;
+ return {id:i,group,rank,side,skin:skin[(i*7)%skin.length],hair:hair[(i*7+Math.floor(i/6))%hair.length],style:i%6,pose:i%4,
+  shades:[0,1,2,3].map((_,j)=>colors[(group+j*(1+i%3))%5]),phase:i*2.39996,
+  home:{x:115+((i*37)%100%10)*85+Math.sin(i*4.1)*12,y:70+Math.floor(((i*37)%100)/10)*66+Math.cos(i*3.7)*7}};
+});
+// Compute stable group slots. All IDs occur exactly once in every layout.
+for(let side=0;side<2;side++)people.filter(p=>p.side===side).forEach((p,n)=>p.finalRank=n);
+const centers=[{x:192,y:205},{x:500,y:205},{x:808,y:205},{x:340,y:540},{x:660,y:540}];
+function locationAt(p,stage){
+ if(stage<2)return p.home;
+ if(stage<4){const c=centers[p.group];return {x:c.x+(p.rank%5-2)*46,y:c.y+(Math.floor(p.rank/5)-1.5)*63};}
+ return {x:(p.side===0?255:745)+(p.finalRank%7-3)*45,y:135+Math.floor(p.finalRank/7)*69};
+}
+function shadesAt(p,stage){
+ if(stage===0)return p.shades.map(c=>c.map(v=>mix(v,205,.48)));
+ if(stage===1 || stage===2)return p.shades;
+ if(stage===3)return p.shades.map(()=>colors[p.group]);
+ return p.shades.map(()=>p.side===0?red:blue);
+}
+let width=0,height=0,scale=1,offsetX=0,offsetY=0,progress=0,active=-1,paused=false,lastTime=0,clock=0;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+function resize(){
+ const box=canvas.getBoundingClientRect(), dpr=Math.min(devicePixelRatio||1,2);
+ width=box.width;height=box.height;canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
+ ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingEnabled=false;
+ scale=Math.min(width/1000,height/760);offsetX=(width-1000*scale)/2;offsetY=(height-760*scale)/2;
+ const faceBox=faceCanvas.getBoundingClientRect();faceCanvas.width=Math.round(faceBox.width*dpr);faceCanvas.height=Math.round(faceBox.height*dpr);
+ faceCtx.setTransform(dpr,0,0,dpr,0,0);faceCtx.imageSmoothingEnabled=false;readScroll();
+}
+function readScroll(){
+ // Each section is exactly one viewport; use actual section offsets for short screens too.
+ const y=window.scrollY;
+ let n=0;while(n<4 && y>=steps[n+1].offsetTop)n++;
+ progress=clamp(n+(y-steps[n].offsetTop)/steps[n].offsetHeight,0,4);
+ const next=Math.round(progress);
+ if(next!==active){active=next;document.body.dataset.stage=String(active);document.querySelector('#scene-label').textContent=names[active];document.querySelector('#caption').textContent=captions[active];document.querySelector('#status').textContent=names[active];links.forEach((link,i)=>{if(i===active)link.setAttribute('aria-current','step');else link.removeAttribute('aria-current');});document.querySelector('.face-study').classList.toggle('visible',active>=3);}
+ document.querySelector('.progress').style.width=(progress/4*100)+'%';
+}
+// Draw on a tiny pixel grid. Rectangles stay crisp; no raster image assets needed.
+// Variations: six hairstyles, five skin tones, four neutral / suspicious poses.
+function drawPerson(c,p,x,y,size,shades,suspicion,gaze,bob){
+ c.save();c.translate(Math.round(x),Math.round(y+bob));c.scale(size,size);
+ const r=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h);};
+ const ink='#383333', shadow='#ded8ca', skinTone=p.skin;
+ r(2,29,16,2,shadow);
+ // Legs keep separate patches initially; both converge to the same group color at the end.
+ r(5,21,4,7,shades[2]);r(11,21,4,7,shades[3]);r(4,28,5,2,ink);r(11,28,5,2,ink);
+ r(4,12,12,10,shades[0]);r(4,12,12,2,shades[1]);r(8,12,4,2,skinTone);
+ const suspect=suspicion>.5;
+ if(!suspect){
+  if(p.pose===0){r(1,13,3,8,shades[1]);r(1,21,3,3,skinTone);r(16,13,3,8,shades[1]);r(16,21,3,3,skinTone);}
+  else if(p.pose===1){r(1,13,3,6,shades[1]);r(1,19,3,3,skinTone);r(16,13,3,4,shades[1]);r(15,17,4,2,skinTone);r(13,18,3,2,skinTone);}
+  else if(p.pose===2){r(1,13,3,8,shades[1]);r(1,21,3,2,skinTone);r(16,13,3,7,shades[1]);r(14,20,4,2,skinTone);}
+  else {r(1,13,3,6,shades[1]);r(16,13,3,6,shades[1]);r(3,18,4,3,skinTone);r(13,18,4,3,skinTone);}
+ }else if(p.pose%2===0){ // folded arms
+  r(1,13,3,6,shades[1]);r(16,13,3,6,shades[1]);r(3,17,8,3,shades[1]);r(10,18,7,3,shades[1]);r(10,17,4,2,skinTone);r(6,20,4,2,skinTone);
+ }else { // hand on chin
+  r(1,13,3,8,shades[1]);r(3,20,11,3,shades[1]);r(13,15,4,7,shades[1]);r(13,10,3,6,skinTone);r(11,10,3,2,skinTone);
+ }
+ // Hair silhouettes remain recognizable through all color changes.
+ const headShift=gaze*.7;
+ c.save();c.translate(Math.round(headShift),0);
+ if(p.style===1 || p.style===4)r(3,3,14,11,p.hair);
+ r(4,3,12,8,skinTone);r(3,5,1,4,skinTone);r(16,5,1,4,skinTone);r(6,10,8,2,skinTone);
+ r(4,1,12,3,p.hair);r(3,3,2,3,p.hair);r(15,3,2,3,p.hair);
+ if(p.style===0)r(5,0,6,2,p.hair);
+ if(p.style===1){r(4,2,4,3,p.hair);r(14,3,3,10,p.hair);}
+ if(p.style===2){r(6,0,8,2,p.hair);r(4,3,6,1,p.hair);}
+ if(p.style===3){r(4,1,12,2,'#b4aaa0');r(4,3,2,2,'#b4aaa0');}
+ if(p.style===4){r(2,1,4,4,p.hair);r(14,1,4,4,p.hair);}
+ if(p.style===5){r(4,0,3,2,p.hair);r(9,0,4,2,p.hair);r(5,3,10,1,p.hair);}
+ // White sclera + directional pupils make the suspicious side glance readable.
+ const eyeY=suspect?6:5;
+ r(5,eyeY,4,3,'#fff9e9');r(11,eyeY,4,3,'#fff9e9');
+ const eyeOffset=Math.round(clamp((gaze+1)/2)*2);
+ r(5+eyeOffset,eyeY,2,suspect?2:3,ink);r(11+eyeOffset,eyeY,2,suspect?2:3,ink);
+ if(suspect){r(5,4,2,1,ink);r(7,5,2,1,ink);r(11,5,2,1,ink);r(13,4,2,1,ink);r(9,10,3,1,ink);}
+ else{r(9,10,2,1,'#a47058');}
+ c.restore();c.restore();
+}
+function personState(p){
+ const a=Math.floor(progress),b=Math.min(4,a+1),t=ease(clamp((progress-a-.08)/.8));
+ const start=locationAt(p,a),end=locationAt(p,b),ca=shadesAt(p,a),cb=shadesAt(p,b);
+ const suspicion=ease(clamp(progress-2));
+ const final=ease(clamp((progress-3-.05)/.85));
+ const looking=Math.sin(clock*1.45+p.phase)>.15?1:-1;
+ return {x:mix(start.x,end.x,t),y:mix(start.y,end.y,t),shades:ca.map((c,j)=>color(c,cb[j],t)),suspicion,
+ gaze:mix(suspicion*(paused||reduced.matches?(p.id%2?1:-1):looking),p.side===0?1:-1,final),
+ bob:paused||reduced.matches?0:Math.sin(clock*1.8+p.phase)*.75};
+}
+function render(now){
+ const dt=Math.min((now-lastTime)/1000,.05);lastTime=now;
+ if(!paused && !reduced.matches && !document.hidden)clock+=dt;
+ ctx.clearRect(0,0,width,height);
+ ctx.save();ctx.translate(offsetX,offsetY);ctx.scale(scale,scale);
+ // Subtle group footprints appear only as people gather.
+ const groupAlpha=ease(clamp(progress-1))*(1-ease(clamp(progress-3)));
+ ctx.globalAlpha=groupAlpha*.65;
+ centers.forEach((c,i)=>{ctx.fillStyle=color(colors[i],rgb('#f5f2e9'),.9);ctx.fillRect(c.x-133,c.y-130,266,282);});
+ const finalAlpha=ease(clamp(progress-3));ctx.globalAlpha=finalAlpha*.65;
+ ctx.fillStyle='#efdfd8';ctx.fillRect(65,70,380,630);ctx.fillStyle='#dde4ed';ctx.fillRect(555,70,380,630);ctx.globalAlpha=1;
+ // Sorting by feet provides consistent depth when paths cross.
+ const states=people.map(p=>({p,s:personState(p)})).sort((a,b)=>a.s.y-b.s.y);
+ states.forEach(({p,s})=>drawPerson(ctx,p,s.x-18,s.y-26,1.8,s.shades,s.suspicion,s.gaze,s.bob));
+ ctx.restore();
+ if(active>=3){const dpr=Math.min(devicePixelRatio||1,2),w=faceCanvas.width/dpr;faceCtx.clearRect(0,0,w,92);[people[0],people[46],people[82]].forEach((p,i)=>{const s=personState(p);drawPerson(faceCtx,p,w*(i+.5)/3-25,2,2.7,s.shades,s.suspicion,s.gaze,0);});}
+ requestAnimationFrame(render);
+}
+function updateMotionButton(){const stopped=paused||reduced.matches;document.querySelector('#motion').textContent=reduced.matches?'減少動態已啟用':paused?'恢復微動':'暫停微動';document.querySelector('#motion').setAttribute('aria-pressed',String(stopped));document.querySelector('#motion').disabled=reduced.matches;}
+document.querySelector('#motion').addEventListener('click',()=>{paused=!paused;updateMotionButton();});
+document.querySelector('#restart').addEventListener('click',()=>{history.replaceState(null,'',location.pathname+location.search);window.scrollTo({top:0,behavior:reduced.matches?'instant':'smooth'});});
+window.addEventListener('scroll',readScroll,{passive:true});window.addEventListener('resize',resize);reduced.addEventListener('change',updateMotionButton);
+updateMotionButton();resize();requestAnimationFrame(render);
+</script>
+</body>
+</html>

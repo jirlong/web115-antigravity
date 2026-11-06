@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 滑頁與長頁捲動</title>
+    <style>
+        body { margin: 0; }
+        main { height: 100vh; overflow-y: auto; position: relative; }
+        section, .part {
+            height: 100vh;
+            display: grid;
+            place-content: center;
+            text-align: center;
+            color: white;
+            font: bold 36px sans-serif;
+        }
+        section.long { height: 200vh; display: block; }
+        p { font-size: 20px; font-weight: normal; }
+    </style>
+</head>
+<body>
+    <main>
+        <section style="background: #b34848;">第一頁</section>
+        <section style="background: #326b9b;">第二頁</section>
+        <section class="long" style="background: #39735a;">
+            <div class="part">
+                第三頁：上半部
+                <p>這一頁高 200vh，往下正常捲動。</p>
+            </div>
+            <div class="part" style="background: #285540;">
+                第三頁：下半部
+                <p>捲到底後，再往下捲，滑入第四頁。</p>
+            </div>
+        </section>
+        <section style="background: #75529b;">第四頁</section>
+        <section style="background: #946021;">第五頁</section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        const main = $('main');
+        const pages = $('section');
+        let busy = false;
+
+        // 改用實際 scrollTop：短頁用 animate 滑入，長頁保留一般捲動。
+        // 事件綁在 main，方便在換頁時用 preventDefault 阻止原本的捲動。
+        main.on('wheel', function (event) {
+            const wheel = event.originalEvent;
+            const delta = wheel.deltaY;
+            if (delta === 0) return;
+            if (busy) { event.preventDefault(); return; }
+
+            const top = main.scrollTop();
+            let page = 0;
+            // 依目前位置判斷頁碼，也能配合捲軸或鍵盤改變的位置。
+            pages.each(function (i) {
+                if (this.offsetTop <= top + 1) page = i;
+            });
+
+            const start = pages[page].offsetTop;
+            const end = start + pages.eq(page).height() - main.height();
+
+            // 長頁尚未捲到底／頂時，交給瀏覽器正常捲動。
+            if ((delta > 0 && top < end - 1) || (delta < 0 && top > start + 1)) {
+                // 將行／頁單位換成像素，檢查這次捲動是否會超出長頁。
+                const distance = delta * (wheel.deltaMode === 1 ? 16 : wheel.deltaMode === 2 ? main.height() : 1);
+                if (top + distance > end || top + distance < start) {
+                    event.preventDefault();
+                    main.scrollTop(delta > 0 ? end : start);
+                }
+                return;
+            }
+
+            event.preventDefault();
+            const next = page + (delta > 0 ? 1 : -1);
+            if (next < 0 || next >= pages.length) return;
+
+            // 往下進入新頁的頂部；往回則進入上一頁的底部。
+            // 因此第四頁往回滑時，會先看到第三頁的下半部。
+            const target = pages[next].offsetTop + (delta < 0 ? pages.eq(next).height() - main.height() : 0);
+            busy = true;
+            main.animate({ scrollTop: target }, 600, function () {
+                setTimeout(function () { busy = false; }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

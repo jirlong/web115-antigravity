@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>100 個點，看見臺大新聞所</title><meta name="description" content="同一組100個點，在捲動中呈現臺大新聞所學生的多元背景、畢業方式與職涯方向。比例為規劃示意。"><style>
+:root{--paper:#f6f3eb;--ink:#203e3c;--muted:#637673;--line:#d9ded7;--accent:#b34d36}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif}a{color:inherit;text-underline-offset:4px}header{padding:22px 5vw;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.1em}header b{font-size:14px}.intro{padding:6vh 6vw 3vh;min-height:41vh;max-width:1100px}.eyebrow{font-size:11px;letter-spacing:.18em;font-weight:700;color:var(--accent);margin:0 0 14px}h1{font-family:Georgia,"Noto Serif TC",serif;font-size:clamp(34px,5vw,64px);letter-spacing:-.04em;line-height:1.14;margin:0 0 18px}h1 em{font-style:normal;color:var(--accent)}.intro p{font-size:14px;line-height:1.8;margin:0;max-width:690px;color:var(--muted)}.hint{display:flex;gap:20px;align-items:center;margin-top:22px;font-size:11px;color:var(--muted)}.sample-dot{display:inline-block;width:8px;height:8px;background:var(--accent);border-radius:50%;margin-right:6px}.step{height:50vh;border-top:1px solid var(--line);position:relative;margin:0 5vw}.copy{height:25vh;display:grid;grid-template-columns:60px 1fr 175px;align-items:center;gap:20px;padding:12px 1vw}.num{font-family:Georgia,serif;font-size:32px;color:#9ca9a2;align-self:start;padding-top:22px}.copy h2{font-family:Georgia,"Noto Serif TC",serif;font-size:clamp(22px,2.6vw,35px);line-height:1.3;letter-spacing:-.025em;margin:0 0 10px}.copy p{font-size:13px;line-height:1.75;margin:0;color:var(--muted);max-width:760px}.stat{border-left:1px solid var(--line);padding-left:24px;font-size:11px;line-height:1.6;color:var(--muted)}.stat strong{display:block;font-size:46px;line-height:1.15;font-family:Georgia,serif;color:var(--accent);font-weight:normal}.viz{width:100%;height:25vh;display:block;overflow:visible}.ring{fill:none;stroke-width:1.2;stroke-linecap:square;stroke-linejoin:miter}.legend-swatch{stroke-width:0}.group-label{font-size:11px;font-weight:600}.group-value{font-size:11px;font-variant-numeric:tabular-nums}.ghost{fill:#c8ceca}.live-layer{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:hidden}.dot{pointer-events:auto;stroke:var(--paper);stroke-width:.6}.end{padding:7vh 7vw 5vh;min-height:60vh;border-top:1px solid var(--line)}.end h2{font-size:clamp(25px,3vw,40px);font-family:Georgia,"Noto Serif TC",serif;margin:0 0 16px}.end>p{font-size:14px;line-height:1.9;max-width:660px;color:var(--muted)}details{margin:32px 0 25px;border-top:1px solid var(--line);padding-top:16px;font-size:12px;max-width:960px;line-height:1.8}summary{cursor:pointer;font-weight:600}table{border-collapse:collapse;width:100%;margin:18px 0}td,th{text-align:left;border-bottom:1px solid var(--line);padding:6px 10px}footer{padding:20px 7vw;border-top:1px solid var(--line);font-size:10px;color:var(--muted);letter-spacing:.04em}.progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9;transform-origin:left;width:100%;transform:scaleX(0)}.note{font-size:11px!important}.dot:focus{outline:none;stroke:var(--ink);stroke-width:2} @media(max-width:650px){header{padding:16px 5vw;font-size:10px}header span{display:none}.intro{min-height:42vh;padding-top:5vh}.copy{grid-template-columns:27px 1fr 64px;gap:9px;padding:5px 0}.num{font-size:21px;padding-top:15px}.copy h2{font-size:22px;margin-bottom:7px}.copy p{font-size:11px;line-height:1.6}.stat{padding-left:9px;font-size:9px}.stat strong{font-size:28px}.group-label,.group-value{font-size:9px}.end{padding-top:5vh}.hint{font-size:10px;gap:10px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.dot{cursor:pointer;stroke-width:.8}.dot:hover{stroke:var(--ink);stroke-width:2}.profile-tip{position:fixed;z-index:12;background:#203e3c;color:#fff;padding:14px 16px;width:240px;max-width:calc(100vw - 24px);box-shadow:0 8px 26px #203e3c26;pointer-events:none;font-size:12px;line-height:1.8}.profile-tip[hidden]{display:none}.profile-tip b{display:block;font-size:14px;margin-bottom:5px}.profile-tip small{display:block;color:#c5d2c9;margin-top:6px;font-size:10px}.profile-row{display:flex;justify-content:space-between;gap:12px}.profile-row span{color:#bacdc5}.ring{stroke-width:1.3;stroke-linejoin:round;stroke-linecap:round}.group-label{font-size:14px;font-weight:600;paint-order:stroke;stroke:var(--paper);stroke-width:4px;stroke-linejoin:round}.group-value{font:600 26px Georgia,serif;paint-order:stroke;stroke:var(--paper);stroke-width:4px;stroke-linejoin:round}.leader{fill:none;stroke:#bac1b9;stroke-width:.8}.ghost{fill:#e0e1db}.dot{stroke-width:.6}.dot:hover{stroke:#637673}.sample-dot{background:#c4ceca}@media(max-width:650px){.group-label{font-size:10px;stroke-width:3px}.group-value{font-size:18px;stroke-width:3px}}.group-label{font-size:14px}.group-value{font-size:24px}@media(max-width:650px){.group-label{font-size:12px}.group-value{font-size:18px}}.workplaces{font-size:10px;line-height:1.55;margin-top:7px;color:var(--muted);max-width:850px;display:flex;gap:2px 12px;flex-wrap:wrap}.workplaces span:first-child{flex-basis:100%}.workplaces b{font-weight:600;color:#41564e}.industry-bracket{fill:none;stroke:#60776b;stroke-width:1.4}.industry-caption{fill:#203e3c;font-size:14px;font-weight:700}@media(max-width:650px){.workplaces{font-size:9px;line-height:1.4;gap:1px 8px}.industry-caption{font-size:11px}.step:last-child .copy h2{font-size:19px}.step:last-child .copy p{font-size:10px}.step:last-child .copy{grid-template-columns:24px 1fr 56px;gap:6px}}</style></head><body><div class="progress" aria-hidden="true"></div><header><b>臺大新聞所　NTU JOURNALISM</b><span>STUDENT PORTRAIT / 近五年學生輪廓・比例示意</span><a href="#story">往下探索 ↓</a></header>
+<main><div class="intro"><div class="eyebrow">MANY BACKGROUNDS. SHARED CURIOSITY.</div><h1>100 個點，<br>看見新聞所的<em>不同起點。</em></h1><p>把近五年的學生想像成 100 個點。來自不同領域，帶著不同的問題，在這裡把既有專業與公共關懷，轉化為研究與新聞敘事。</p><div class="hint"><span><i class="sample-dot"></i>1 個點 = 1%</span><span>5 排 × 20 欄・移到點上看示意人物</span><span>比例為規劃示意</span></div></div>
+<div id="story"></div>
+<section class="end"><div class="eyebrow">BRING YOUR QUESTIONS.</div><h2>帶著原本的專業，<br>走向新的公共現場。</h2><p>從研究方法、採訪寫作到影像與資料敘事，多元背景成為理解社會的起點。共同的訓練，讓不同專長有機會變成可以進入公共討論的作品。</p><p><a href="https://journalism.ntu.edu.tw/iwantyou.html" target="_blank" rel="noopener">認識臺大新聞所的訓練與招生特色 ↗</a>　<a href="#story">重新看一次 ↑</a></p></section></main><footer>國立臺灣大學新聞研究所　／　100 DOTS, MANY POSSIBILITIES　／　互動示意原型</footer><svg class="live-layer" aria-label="100個示意人物，各點可查看模擬profile"></svg><div id="profile-tip" class="profile-tip" role="tooltip" hidden></div>
+<script>
+/* 每段上25vh文字、下25vh圖表。只建立100個彩色圓點，依捲動進度在各段座標間插值；每段另留100個灰點當作歷史底圖。所有段落固定為5排20欄，分類採直角框線。 */
+const palette=['#d0c8c0','#c4ceca','#d3cec0','#c4ccd0','#ccc6d0','#d2c7c1','#cad0c4','#d0c5c9','#c5cfcc','#ceccc2','#c8ccd0'];
+const raw=[['大眾傳播',25],['新聞',5],['社會',15],['政治',25],['中文',12],['外文',18],['法律',5],['公衛',10],['客家學院',5],['農學院',5],['理工',5]];
+function normalize(rows){const sum=rows.reduce((s,r)=>s+r[1],0);let a=rows.map(([name,n],i)=>({name,n:Math.floor(n/sum*100),rem:n/sum*100%1,i}));const left=100-a.reduce((s,r)=>s+r.n,0);[...a].sort((a,b)=>b.rem-a.rem||a.i-b.i).slice(0,left).forEach(r=>r.n++);return a.map(r=>[r.name,r.n]);}
+const stages=[
+{title:'不同專業，進入同一個新聞現場。',text:'人文、社會科學、傳播與科技，都是理解公共問題的入口。原有專業不必重來，而是成為採訪與研究的起點。',stat:'11',unit:'種來源領域',data:normalize(raw)},
+{title:'來自不同學校，在這裡交會。',text:'公立學校占67%，私立學校占33%。社會、政治、公衛與農學院來源多為臺大；大眾傳播背景也包含部分生傳學生。',stat:'67%',unit:'來自公立學校',data:[['公立學校',67],['私立學校',33]]},
+{title:'多數剛畢業，也有帶著現場經驗回來的記者。',text:'應屆畢業生是主要組成；在職記者帶著新聞現場的問題重返課堂，其他背景則帶來不同的工作與生活經驗。',stat:'83%',unit:'應屆畢業生',data:[['應屆畢業',83],['記者進修',8],['其他背景',9]]},
+{title:'用研究，也用報導，完成對社會的追問。',text:'畢業成果可以是學術論文，也可以是文字、影像或多媒體深度報導。方法與媒介不同，都需要問題意識與證據。',stat:'44%',unit:'以報導作品畢業',data:[['學術論文',56],['文字報導',26],['影像報導',5],['多媒體報導',13]]},
+{title:'第一份工作，從新聞媒體產業出發。',text:'78%進入新聞媒體產業，涵蓋文字記者、跑線、廣播、多媒體與資訊服務；8%投入公關，其餘14%走向其他工作。',stat:'78%',unit:'第一份工作在新聞媒體產業',industry:true,data:[['文字記者',56],['跑線',6],['廣播',4],['多媒體',6],['資訊服務',6],['公關',8],['其他',14]],employers:[['文字記者','主流雜誌、報導者、公視、中央社、BBC中文、亞洲電台、商周、今周刊、天下、遠見、康健、聯合、自由'],['跑線','民視、公視、TVBS'],['廣播','央廣、台北廣播電台等'],['多媒體','台視、公視、中央社'],['資訊服務','中央社']]}
+];
+const ns='http://www.w3.org/2000/svg';function el(tag,attrs,parent){const n=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);parent.append(n);return n;}
+const story=document.querySelector('#story'),overlay=document.querySelector('.live-layer');
+stages.forEach((s,i)=>{const section=document.createElement('section');section.className='step';section.innerHTML=`<div class="copy"><div class="num">0${i+1}</div><div><h2>${s.title}</h2><p>${s.text}</p></div><div class="stat"><strong>${s.stat}</strong>${s.unit}</div></div><svg class="viz" role="img" aria-label="${s.title} ${s.data.map(d=>d.join('：')+'%').join('，')}"></svg>`;story.append(section);s.section=section;s.svg=section.querySelector('svg');if(s.employers){const places=document.createElement('div');places.className='workplaces';places.innerHTML=s.employers.map(([role,names])=>`<span><b>${role}</b>：${names}</span>`).join('');section.querySelector('.copy p').after(places);}});
+// 每個人物保有同一個ID；每個階段各自決定分類與位置，重整或往回捲都一致。
+function shuffled(seed){let state=seed;const rand=()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296};const ids=Array.from({length:100},(_,i)=>i);for(let i=99;i>0;i--){const j=Math.floor(rand()*(i+1));[ids[i],ids[j]]=[ids[j],ids[i]]}return ids}
+const profiles=Array.from({length:100},(_,id)=>({id,groups:[]}));
+const stageOrders=stages.map((s,stage)=>{const order=shuffled(1207+stage*7919);let slot=0;s.data.forEach(([,n],g)=>{for(let k=0;k<n;k++)profiles[order[slot++]].groups[stage]=g});return order});
+const tip=document.querySelector('#profile-tip');const profileLabels=['原有專業','學校類型','入學背景','畢業方式','第一份工作'];
+function showProfile(id,event){const p=profiles[id];tip.innerHTML=`<b>示意人物 ${String(id+1).padStart(3,'0')}</b>${p.groups.map((g,i)=>`<div class="profile-row"><span>${profileLabels[i]}</span><strong>${stages[i].data[g][0]}</strong></div>`).join('')}<small>模擬屬性組合，非真實學生資料</small>`;tip.hidden=false;tip.style.left=Math.max(12,Math.min(innerWidth-252,event.clientX+14))+'px';tip.style.top=Math.max(12,Math.min(innerHeight-225,event.clientY+14))+'px'}
+const dots=profiles.map(p=>{const d=el('circle',{class:'dot','aria-label':`示意人物 ${p.id+1}`},overlay);const title=el('title',{},d);title.textContent=`示意人物 ${p.id+1}（模擬資料）\n`+p.groups.map((g,i)=>`${profileLabels[i]}：${stages[i].data[g][0]}`).join('\n');d.onpointerenter=e=>showProfile(p.id,e);d.onpointermove=e=>showProfile(p.id,e);d.onpointerleave=()=>{tip.hidden=true};d.onclick=e=>showProfile(p.id,e);return d});
+addEventListener('scroll',()=>{tip.hidden=true},{passive:true});addEventListener('keydown',e=>{if(e.key==='Escape')tip.hidden=true});addEventListener('pointerdown',e=>{if(!dots.includes(e.target))tip.hidden=true});
+let layouts=[],frame=0;
+// 將格線外框接成完整多邊形，刪除共線頂點，再為每個凸角與凹角加入二次曲線。
+function roundedOutline(edges,left,top,pitch,inset=pitch*.06){
+  const key=p=>p.join(',');const next=new Map(edges.map(e=>[key(e[0]),e[1]]));
+  let p=edges[0][0],start=key(p),vertices=[];
+  do{vertices.push(p);p=next.get(key(p));if(!p)throw Error('分類框線未閉合')}while(key(p)!==start&&vertices.length<500);
+  vertices=vertices.filter((v,i,all)=>{const a=all[(i+all.length-1)%all.length],b=all[(i+1)%all.length];return (v[0]-a[0])*(b[1]-v[1])!==(v[1]-a[1])*(b[0]-v[0])});
+  vertices=vertices.map((v,i,all)=>{
+    const a=all[(i+all.length-1)%all.length],b=all[(i+1)%all.length];
+    const ax=v[0]-a[0],ay=v[1]-a[1],bx=b[0]-v[0],by=b[1]-v[1];
+    const da=Math.hypot(ax,ay),db=Math.hypot(bx,by);
+    return [left+v[0]*pitch+(-ay/da-by/db)*inset,top+v[1]*pitch+(ax/da+bx/db)*inset];
+  });
+  const r=Math.min(8,pitch*.25),cuts=vertices.map((v,i)=>{const a=vertices[(i+vertices.length-1)%vertices.length],b=vertices[(i+1)%vertices.length],da=Math.hypot(a[0]-v[0],a[1]-v[1]),db=Math.hypot(b[0]-v[0],b[1]-v[1]),rr=Math.min(r,da/2,db/2);return {v,before:[v[0]+(a[0]-v[0])*rr/da,v[1]+(a[1]-v[1])*rr/da],after:[v[0]+(b[0]-v[0])*rr/db,v[1]+(b[1]-v[1])*rr/db]}});
+  return cuts.map((c,i)=>`${i?'L':'M'}${c.before}Q${c.v} ${c.after}`).join('')+'Z';
+}
+function layout(){
+  const mobile=innerWidth<650;
+  layouts=stages.map((s,stage)=>{
+    const w=s.svg.clientWidth,h=s.svg.clientHeight;
+    s.svg.replaceChildren();s.svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+    const labelFont=mobile?12:14,valueFont=s.data.length>7?(mobile?13:20):(mobile?18:24);
+    const labelSpace=Math.max(...s.data.map(d=>d[0].length))*labelFont+valueFont+12;
+    // 分類間另加間距；所有段落仍是5排、共100點，保持緊密的整體長條。
+    const gapRatio=.24;
+    const pitch=Math.min((w-12)/(20+(s.data.length-1)*gapRatio),Math.max(8,(h-labelSpace-12-(s.industry?28:0))/5),34);
+    const gap=pitch*gapRatio,totalWidth=20*pitch+(s.data.length-1)*gap;
+    const left=(w-totalWidth)/2,gridTop=labelSpace,rr=pitch*.39;
+    const owners=[];s.data.forEach(([,n],g)=>{for(let k=0;k<n;k++)owners.push(g)});
+    const points=Array(100),rings=[];
+    s.data.forEach(([name,n],g)=>{
+      const color=palette[g%palette.length],edges=[],cells=[];
+      for(let i=0;i<100;i++){
+        if(owners[i]!==g)continue;
+        const col=Math.floor(i/5),row=i%5;cells.push([col,row]);
+        const segment=(x1,y1,x2,y2)=>edges.push([[x1,y1],[x2,y2]]);
+        if(row===0||owners[i-1]!==g)segment(col,row,col+1,row);
+        if(col===19||owners[i+5]!==g)segment(col+1,row,col+1,row+1);
+        if(row===4||owners[i+1]!==g)segment(col+1,row+1,col,row+1);
+        if(col===0||owners[i-5]!==g)segment(col,row+1,col,row);
+      }
+      const ring=el('path',{d:roundedOutline(edges,left+g*gap,gridTop,pitch),class:'ring',stroke:'#bfc5bc'},s.svg);
+      const minCol=Math.min(...cells.map(c=>c[0])),maxCol=Math.max(...cells.map(c=>c[0]));
+      const targetX=left+g*gap+(minCol+maxCol+1)*pitch/2;
+      const valueY=gridTop-10;
+      const label=el('text',{x:targetX,'text-anchor':'middle',fill:'#344d47',class:'group-label'},s.svg);
+      // 每字一行，百分比獨立橫排；各組數字保持同一條基線。
+      [...name].forEach((char,j)=>{const tspan=el('tspan',{x:targetX,y:valueY-valueFont-5-(name.length-1-j)*labelFont},label);tspan.textContent=char});
+      const value=el('text',{x:targetX,y:valueY,'text-anchor':'middle',fill:'#203e3c',class:'group-value'},s.svg);value.textContent=n+'%';value.style.fontSize=valueFont+'px';
+      const leader=el('path',{d:`M${targetX},${valueY+3}L${targetX},${gridTop-2}`,class:'leader'},s.svg);
+      rings.push({ring,label,value,color,leader});
+    });
+    for(let i=0;i<100;i++){
+      const g=owners[i],x=left+g*gap+(Math.floor(i/5)+.5)*pitch,y=gridTop+(i%5+.5)*pitch;
+      el('circle',{cx:x,cy:y,r:rr,class:'ghost'},s.svg);
+      points[stageOrders[stage][i]]={x,y,r:rr,color:palette[g%palette.length],name:s.data[g][0]};
+    }
+    if(s.industry){
+      const x1=left+pitch*.06,x2=left+4*gap+16*pitch-pitch*.06,y=gridTop+5*pitch+5;
+      el('path',{d:`M${x1},${y-5}L${x1},${y}Q${x1},${y+3} ${x1+3},${y+3}L${x2-3},${y+3}Q${x2},${y+3} ${x2},${y}L${x2},${y-5}`,class:'industry-bracket'},s.svg);
+      const caption=el('text',{x:(x1+x2)/2,y:y+20,'text-anchor':'middle',class:'industry-caption'},s.svg);caption.textContent='新聞媒體產業 78%';
+    }
+    return {points,rings,ghosts:[...s.svg.querySelectorAll('.ghost')]};
+  });draw();
+}
+function mix(a,b,t){return a+(b-a)*t}function rgb(hex){return hex.match(/[\da-f]{2}/gi).map(c=>parseInt(c,16))}function colorMix(a,b,t){const x=rgb(a),y=rgb(b);return `rgb(${x.map((v,k)=>Math.round(mix(v,y[k],t))).join(',')})`;}
+function draw(){frame=0;const vh=innerHeight,top=story.getBoundingClientRect().top;const phase=Math.max(0,Math.min(stages.length-1,(vh*.25-top)/(vh*.5)));const a=Math.floor(phase),b=Math.min(a+1,stages.length-1),raw=phase-a;let t=Math.max(0,Math.min(1,(raw-.12)/.76));t=t*t*(3-2*t);const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce)t=t<.5?0:1;const rects=stages.map(s=>s.svg.getBoundingClientRect());layouts.forEach((l,i)=>{const weight=i===a?1-t:i===b?t:0;l.ghosts.forEach(n=>n.style.opacity=i<phase?1:0);l.rings.forEach(({ring,label,value,leader})=>{ring.setAttribute('stroke',weight>.1?'#afb8ac':'#d2d6ce');ring.setAttribute('opacity',.55+.45*weight);label.setAttribute('fill','#41564e');value.setAttribute('fill','#203e3c');leader.setAttribute('opacity',.45+.55*weight);});});dots.forEach((d,i)=>{
+  const x=layouts[a].points[i],y=layouts[b].points[i];
+  // 個別錯開出發時間，再沿不同弧線移動，避免整片點陣一起垂直平移。
+  const delay=((i*37)%100)/100*.22;
+  let pt=Math.max(0,Math.min(1,t*1.22-delay));pt=pt*pt*(3-2*pt);
+  if(reduce)pt=t;
+  const arc=Math.sin(Math.PI*pt),drift=(((i*61)%101)-50)*Math.min(1,innerWidth/700);
+  d.setAttribute('cx',mix(rects[a].left+x.x,rects[b].left+y.x,pt)+(reduce?0:arc*drift));
+  d.setAttribute('cy',mix(rects[a].top+x.y,rects[b].top+y.y,pt)+(reduce?0:arc*Math.sin(i*2.4)*26));
+  d.setAttribute('r',mix(x.r,y.r,pt));d.setAttribute('fill',colorMix(x.color,y.color,pt));
+});document.querySelector('.progress').style.transform=`scaleX(${Math.max(0,Math.min(1,scrollY/(document.documentElement.scrollHeight-vh)))})`;}
+function schedule(){if(!frame)frame=requestAnimationFrame(draw)}addEventListener('scroll',schedule,{passive:true});addEventListener('resize',layout);layout();
+</script></body></html>
