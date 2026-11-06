@@ -507,15 +507,48 @@
       background: var(--card-bg);
       border: 1px solid var(--line);
       border-radius: 12px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22), 0 2px 10px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      z-index: 1000;
+      z-index: 99999;
       opacity: 0;
       transform: translateY(24px) scale(0.96);
       pointer-events: none;
       transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), height 0.2s ease;
+    }
+
+    /* 50vh 螢幕中線指示條 */
+    .center-guide-line {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 0;
+      border-top: 1px dashed rgba(187, 70, 43, 0.35);
+      pointer-events: none;
+      z-index: 9990;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    body.show-guide .center-guide-line {
+      opacity: 1;
+    }
+
+    .center-guide-tag {
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 1px 7px;
+      border-radius: 0 4px 4px 0;
+      transform: translateY(-50%);
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     .preview-widget.visible {
@@ -1379,6 +1412,34 @@
   </footer>
 </div>
 
+<!-- 50vh 螢幕正中指示線 (輔助視覺感知) -->
+<div class="center-guide-line" id="centerGuideLine" aria-hidden="true">
+  <span class="center-guide-tag">50vh 觸發中線</span>
+</div>
+
+<!-- 50vh 即時子網頁浮動預覽視窗元件 -->
+<div id="previewWidget" class="preview-widget" aria-label="子網頁預覽視窗">
+  <div class="preview-header">
+    <div class="preview-indicator" title="當單元停在視窗 50vh 時自動觸發">
+      <span class="preview-indicator-dot"></span>
+      <span>50vh 預覽</span>
+    </div>
+    <div class="preview-title-area">
+      <span class="preview-title" id="previewTitle">子網頁預覽</span>
+      <div class="preview-tabs" id="previewTabs"></div>
+    </div>
+    <div class="preview-controls">
+      <a id="previewExtLink" href="#" target="_blank" rel="noopener noreferrer" class="preview-btn" title="在新分頁開啟完整網頁">↗</a>
+      <button type="button" id="previewMinBtn" class="preview-btn" title="最小化">一</button>
+      <button type="button" id="previewCloseBtn" class="preview-btn" title="關閉預覽">✕</button>
+    </div>
+  </div>
+  <div class="preview-body">
+    <div class="preview-loading" id="previewLoading">載入中...</div>
+    <iframe id="previewIframe" class="preview-iframe" src="about:blank" title="子網頁預覽框架"></iframe>
+  </div>
+</div>
+
 <script>
   // 學習進度儲存與勾選狀態
   const STORAGE_KEY = 'web115_curriculum_progress';
@@ -1610,20 +1671,31 @@
     if (!isPreviewEnabled) return;
 
     const viewportCenter = window.innerHeight * 0.5;
-    const subItems = document.querySelectorAll('.sub-item');
-    let matchedItem = null;
+    // 取得所有目前可見的課程單元（排除折疊或搜尋隱藏的單元）
+    const subItems = Array.from(document.querySelectorAll('.sub-item')).filter(item => item.offsetParent !== null);
+    if (subItems.length === 0) {
+      previewTicking = false;
+      return;
+    }
 
-    for (let i = 0; i < subItems.length; i++) {
-      const item = subItems[i];
-      // 忽略被搜尋過濾或折疊隱藏的元素
-      if (item.offsetParent === null) continue;
-
+    // 1. 優先精準判定：單元垂直範圍橫跨 50vh 中心線
+    let matchedItem = subItems.find(item => {
       const rect = item.getBoundingClientRect();
-      // 判斷此單元的頂端與底端是否橫跨視窗 50vh 正中間
-      if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
-        matchedItem = item;
-        break;
-      }
+      return rect.top <= viewportCenter && rect.bottom >= viewportCenter;
+    });
+
+    // 2. 彈性容錯：若剛好停在章節標題列或邊界間隙，選取離 50vh 最近的單元（260px 範圍內）
+    if (!matchedItem) {
+      let minDistance = Infinity;
+      subItems.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        const itemMid = (rect.top + rect.bottom) / 2;
+        const dist = Math.abs(itemMid - viewportCenter);
+        if (dist < minDistance && dist < 280) {
+          minDistance = dist;
+          matchedItem = item;
+        }
+      });
     }
 
     if (matchedItem) {
@@ -1634,7 +1706,7 @@
         showPreviewForUnit(matchedItem);
       }
     } else {
-      // 滾出所有課程卡片範圍時（例如頁首或頁尾），隱藏預覽視窗
+      // 只有當徹底滾出整個課程清單（如滾到最頂部 Hero 或最底部 Footer）時才隱藏
       const listEl = document.getElementById('curriculumList');
       if (listEl) {
         const listRect = listEl.getBoundingClientRect();
@@ -1647,7 +1719,17 @@
   }
 
   // 監聽滾動與視窗調整
+  let guideTimer = null;
+  function showCenterGuide() {
+    document.body.classList.add('show-guide');
+    clearTimeout(guideTimer);
+    guideTimer = setTimeout(() => {
+      document.body.classList.remove('show-guide');
+    }, 1000);
+  }
+
   window.addEventListener('scroll', () => {
+    showCenterGuide();
     if (!previewTicking) {
       requestAnimationFrame(check50vhUnit);
       previewTicking = true;
@@ -1661,7 +1743,7 @@
     }
   });
 
-  // 支援點擊任何單元時，也直接觸發切換至該單元預覽
+  // 支援點擊任何單元時，直接觸發切換至該單元預覽
   document.querySelectorAll('.sub-item').forEach(item => {
     item.addEventListener('click', (e) => {
       // 排除 checkbox、直接點擊 a 連結或按鈕
@@ -1673,32 +1755,9 @@
     });
   });
 
-  // 初次載入檢查
-  setTimeout(check50vhUnit, 300);
+  // 初次載入檢查：若頁面在頂部，點選任何單元或一滾動皆會觸發
+  setTimeout(check50vhUnit, 200);
 </script>
-
-<!-- 50vh 即時子網頁浮動預覽視窗元件 -->
-<div id="previewWidget" class="preview-widget" aria-label="子網頁預覽視窗">
-  <div class="preview-header">
-    <div class="preview-indicator" title="當單元停在視窗 50vh 時自動觸發">
-      <span class="preview-indicator-dot"></span>
-      <span>50vh 預覽</span>
-    </div>
-    <div class="preview-title-area">
-      <span class="preview-title" id="previewTitle">子網頁預覽</span>
-      <div class="preview-tabs" id="previewTabs"></div>
-    </div>
-    <div class="preview-controls">
-      <a id="previewExtLink" href="#" target="_blank" rel="noopener noreferrer" class="preview-btn" title="在新分頁開啟完整網頁">↗</a>
-      <button type="button" id="previewMinBtn" class="preview-btn" title="最小化">一</button>
-      <button type="button" id="previewCloseBtn" class="preview-btn" title="關閉預覽">✕</button>
-    </div>
-  </div>
-  <div class="preview-body">
-    <div class="preview-loading" id="previewLoading">載入中...</div>
-    <iframe id="previewIframe" class="preview-iframe" src="about:blank" title="子網頁預覽框架"></iframe>
-  </div>
-</div>
 
 </body>
 </html>
