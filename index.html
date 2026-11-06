@@ -358,7 +358,22 @@
       grid-template-columns: 24px 1fr auto;
       gap: 16px;
       align-items: flex-start;
-      transition: background-color 0.15s;
+      position: relative;
+      cursor: pointer;
+      transition: background-color 0.2s, padding 0.2s, box-shadow 0.2s, border-radius 0.2s;
+    }
+
+    .sub-item:hover {
+      background-color: rgba(0, 0, 0, 0.015);
+    }
+
+    /* 當單元停在 50vh (視窗正中間) 時的高亮效果 */
+    .sub-item.in-center {
+      background-color: #f7ede8;
+      border-radius: 8px;
+      padding-left: 14px;
+      padding-right: 14px;
+      box-shadow: inset 4px 0 0 var(--accent), 0 2px 10px rgba(187, 70, 43, 0.08);
     }
 
     .sub-item:last-child {
@@ -481,7 +496,205 @@
       color: var(--muted);
     }
 
+    /* 50vh 子網頁浮動預覽視窗 (Floating Live Preview Widget) */
+    .preview-widget {
+      position: fixed;
+      right: 28px;
+      bottom: 28px;
+      width: 480px;
+      max-width: calc(100vw - 36px);
+      height: 350px;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), height 0.2s ease;
+    }
+
+    .preview-widget.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .preview-widget.minimized {
+      height: 46px;
+    }
+
+    .preview-widget.minimized .preview-body {
+      display: none;
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #fafaf7;
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .preview-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 8px;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .preview-indicator-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulseDot 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.7); }
+    }
+
+    .preview-title-area {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .preview-title {
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--ink);
+    }
+
+    .preview-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+    }
+
+    .preview-tab {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      cursor: pointer;
+      white-space: nowrap;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .preview-tab:hover {
+      background: #dde1d6;
+    }
+
+    .preview-tab.active {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .preview-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .preview-btn {
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+      background: transparent;
+      text-decoration: none;
+    }
+
+    .preview-btn:hover {
+      background: var(--line-subtle);
+      color: var(--ink);
+    }
+
+    .preview-body {
+      flex: 1;
+      position: relative;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .preview-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #fff;
+    }
+
+    .preview-loading {
+      position: absolute;
+      inset: 0;
+      background: rgba(250, 250, 247, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-family: var(--mono);
+      color: var(--muted);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .preview-loading.active {
+      opacity: 1;
+    }
+
+    .btn-preview-toggle.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: #ebd0c8;
+    }
+
     @media (max-width: 680px) {
+      .preview-widget {
+        right: 12px;
+        bottom: 12px;
+        width: calc(100vw - 24px);
+        height: 270px;
+      }
       .shell {
         padding: 0 16px;
       }
@@ -543,6 +756,7 @@
       <div class="actions-group">
         <input type="text" id="filterInput" class="filter-input" placeholder="搜尋主題或語法...">
         <button type="button" class="btn-toggle" id="toggleAllBtn">全部收合</button>
+        <button type="button" class="btn-toggle btn-preview-toggle active" id="toggleLivePreviewBtn" title="開啟或關閉 50vh 滾動自動預覽視窗">50vh 預覽: 開</button>
       </div>
     </div>
   </section>
@@ -956,6 +1170,7 @@
                   <span class="code-tag">height: 400vh (Outer)</span>
                   <span class="code-tag">position: sticky (Middle)</span>
                   <span class="code-tag">width: 400% (Inner Track)</span>
+                  <a class="ref-file" href="hcroll-antigravity.html" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：hcroll-antigravity.html">hcroll-antigravity.html ↗</a>
                   <a class="ref-file" href="scrolling-lab.html#horizontal" target="_blank" rel="noopener noreferrer" title="開啟示範網頁：scrolling-lab.html #horizontal">scrolling-lab.html #horizontal ↗</a>
                 </div>
               </div>
@@ -1284,7 +1499,206 @@
 
   // 初始化進度條
   updateProgress();
+
+  // ----------------------------------------------------
+  // 50vh 視窗正中間單元偵測與子網頁即時預覽功能
+  // ----------------------------------------------------
+  const previewWidget = document.getElementById('previewWidget');
+  const previewIframe = document.getElementById('previewIframe');
+  const previewTitle = document.getElementById('previewTitle');
+  const previewExtLink = document.getElementById('previewExtLink');
+  const previewTabs = document.getElementById('previewTabs');
+  const previewCloseBtn = document.getElementById('previewCloseBtn');
+  const previewMinBtn = document.getElementById('previewMinBtn');
+  const previewLoading = document.getElementById('previewLoading');
+  const toggleLivePreviewBtn = document.getElementById('toggleLivePreviewBtn');
+
+  let isPreviewEnabled = true;
+  let isMinimized = false;
+  let currentActiveItem = null;
+  let currentActiveUrl = '';
+  let previewTicking = false;
+
+  // 切換 50vh 滾動自動預覽開關
+  if (toggleLivePreviewBtn) {
+    toggleLivePreviewBtn.addEventListener('click', () => {
+      isPreviewEnabled = !isPreviewEnabled;
+      toggleLivePreviewBtn.textContent = isPreviewEnabled ? '50vh 預覽: 開' : '50vh 預覽: 關';
+      toggleLivePreviewBtn.classList.toggle('active', isPreviewEnabled);
+      if (!isPreviewEnabled) {
+        hidePreview();
+      } else {
+        check50vhUnit();
+      }
+    });
+  }
+
+  // 關閉按鈕
+  previewCloseBtn.addEventListener('click', () => {
+    hidePreview();
+  });
+
+  // 最小化 / 還原視窗
+  previewMinBtn.addEventListener('click', () => {
+    isMinimized = !isMinimized;
+    previewWidget.classList.toggle('minimized', isMinimized);
+    previewMinBtn.textContent = isMinimized ? '▢' : '一';
+    previewMinBtn.title = isMinimized ? '還原視窗' : '最小化';
+  });
+
+  // iframe 載入完成事件
+  previewIframe.addEventListener('load', () => {
+    previewLoading.classList.remove('active');
+  });
+
+  function hidePreview() {
+    previewWidget.classList.remove('visible');
+    if (currentActiveItem) {
+      currentActiveItem.classList.remove('in-center');
+      currentActiveItem = null;
+    }
+  }
+
+  function showPreviewForUnit(item) {
+    // 找出所有子網頁連結（.ref-file）
+    const links = Array.from(item.querySelectorAll('.ref-file'));
+    if (links.length === 0) return;
+
+    // 優先挑選非純 CSS 的網頁連結（以 html 或其他非 css 檔案為主）
+    const targetLink = links.find(a => !a.getAttribute('href').endsWith('.css')) || links[0];
+    const targetUrl = targetLink.getAttribute('href');
+    const unitTitle = item.querySelector('.sub-item-title')?.textContent.trim() || '單元內容';
+    const unitIndex = item.querySelector('.sub-item-index')?.textContent.trim() || '';
+
+    // 若此單元有多個 demo 示範檔案，在標頭建立快速切換標籤
+    previewTabs.innerHTML = '';
+    if (links.length > 1) {
+      links.forEach(l => {
+        const tabBtn = document.createElement('button');
+        tabBtn.type = 'button';
+        const rawHref = l.getAttribute('href');
+        const fileName = rawHref.split('/').pop();
+        tabBtn.textContent = fileName;
+        tabBtn.className = 'preview-tab' + (rawHref === targetUrl ? ' active' : '');
+        tabBtn.title = `切換到 ${fileName}`;
+        tabBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          loadPreviewUrl(rawHref, (unitIndex ? unitIndex + ' ' : '') + unitTitle);
+          previewTabs.querySelectorAll('.preview-tab').forEach(tb => tb.classList.remove('active'));
+          tabBtn.classList.add('active');
+        });
+        previewTabs.appendChild(tabBtn);
+      });
+    }
+
+    loadPreviewUrl(targetUrl, (unitIndex ? unitIndex + ' ' : '') + unitTitle);
+    previewWidget.classList.add('visible');
+  }
+
+  function loadPreviewUrl(url, titleText) {
+    previewTitle.textContent = titleText;
+    previewExtLink.href = url;
+    if (currentActiveUrl !== url) {
+      currentActiveUrl = url;
+      previewLoading.classList.add('active');
+      previewIframe.src = url;
+    }
+  }
+
+  // 偵測停在 50vh (視窗正中心) 的單元
+  function check50vhUnit() {
+    if (!isPreviewEnabled) return;
+
+    const viewportCenter = window.innerHeight * 0.5;
+    const subItems = document.querySelectorAll('.sub-item');
+    let matchedItem = null;
+
+    for (let i = 0; i < subItems.length; i++) {
+      const item = subItems[i];
+      // 忽略被搜尋過濾或折疊隱藏的元素
+      if (item.offsetParent === null) continue;
+
+      const rect = item.getBoundingClientRect();
+      // 判斷此單元的頂端與底端是否橫跨視窗 50vh 正中間
+      if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+        matchedItem = item;
+        break;
+      }
+    }
+
+    if (matchedItem) {
+      if (currentActiveItem !== matchedItem) {
+        if (currentActiveItem) currentActiveItem.classList.remove('in-center');
+        matchedItem.classList.add('in-center');
+        currentActiveItem = matchedItem;
+        showPreviewForUnit(matchedItem);
+      }
+    } else {
+      // 滾出所有課程卡片範圍時（例如頁首或頁尾），隱藏預覽視窗
+      const listEl = document.getElementById('curriculumList');
+      if (listEl) {
+        const listRect = listEl.getBoundingClientRect();
+        if (listRect.top > viewportCenter || listRect.bottom < viewportCenter) {
+          hidePreview();
+        }
+      }
+    }
+    previewTicking = false;
+  }
+
+  // 監聽滾動與視窗調整
+  window.addEventListener('scroll', () => {
+    if (!previewTicking) {
+      requestAnimationFrame(check50vhUnit);
+      previewTicking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    if (!previewTicking) {
+      requestAnimationFrame(check50vhUnit);
+      previewTicking = true;
+    }
+  });
+
+  // 支援點擊任何單元時，也直接觸發切換至該單元預覽
+  document.querySelectorAll('.sub-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      // 排除 checkbox、直接點擊 a 連結或按鈕
+      if (e.target.closest('input') || e.target.closest('a') || e.target.closest('button')) return;
+      if (currentActiveItem) currentActiveItem.classList.remove('in-center');
+      item.classList.add('in-center');
+      currentActiveItem = item;
+      showPreviewForUnit(item);
+    });
+  });
+
+  // 初次載入檢查
+  setTimeout(check50vhUnit, 300);
 </script>
+
+<!-- 50vh 即時子網頁浮動預覽視窗元件 -->
+<div id="previewWidget" class="preview-widget" aria-label="子網頁預覽視窗">
+  <div class="preview-header">
+    <div class="preview-indicator" title="當單元停在視窗 50vh 時自動觸發">
+      <span class="preview-indicator-dot"></span>
+      <span>50vh 預覽</span>
+    </div>
+    <div class="preview-title-area">
+      <span class="preview-title" id="previewTitle">子網頁預覽</span>
+      <div class="preview-tabs" id="previewTabs"></div>
+    </div>
+    <div class="preview-controls">
+      <a id="previewExtLink" href="#" target="_blank" rel="noopener noreferrer" class="preview-btn" title="在新分頁開啟完整網頁">↗</a>
+      <button type="button" id="previewMinBtn" class="preview-btn" title="最小化">一</button>
+      <button type="button" id="previewCloseBtn" class="preview-btn" title="關閉預覽">✕</button>
+    </div>
+  </div>
+  <div class="preview-body">
+    <div class="preview-loading" id="previewLoading">載入中...</div>
+    <iframe id="previewIframe" class="preview-iframe" src="about:blank" title="子網頁預覽框架"></iframe>
+  </div>
+</div>
 
 </body>
 </html>
